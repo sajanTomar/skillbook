@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Skillbook writes you a real textbook on any subject — contents, chapters, worked examples, exercises and a graded test after every chapter." />
+  <title>Skillbook — Learn anything, written as a real book</title>
+
+  <script>
+    (function () {
+      var s = {};
+      try { s = JSON.parse(localStorage.getItem('skillbook:settings')) || {}; } catch (e) {}
+      var d = document.documentElement;
+      d.dataset.theme  = s.theme  || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      d.dataset.desk   = s.desk   || 'tinted';
+      d.dataset.header = s.header || '1';
+      d.dataset.text   = s.text   || 'md';
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/landing.css" />
+  <link rel="stylesheet" href="css/wizard.css" />
+  <link rel="stylesheet" href="css/devtools.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============================================================
+     HEADER — landing state of all three variants
+     ============================================================ -->
+<header class="site-header no-print">
+
+  <!-- 1 · MASTHEAD -->
+  <div class="hdr hdr--1">
+    <div class="hdr1__top">
+      <div class="hdr__row">
+        <a class="wordmark" href="./index.html">
+          <span class="wordmark__mark" aria-hidden="true">S</span>
+          <span>
+            <span class="wordmark__name">Skillbook</span>
+            <span class="wordmark__tag">Self-Paced Library</span>
+          </span>
+        </a>
+        <p class="hdr1__motto">❦ Learn anything, chapter by chapter</p>
+        <div class="hdr1__acts">
+          <a class="btn btn--plain" href="#how"><span class="btn__label">How it works</span></a>
+          <a class="btn btn--plain" href="#subjects"><span class="btn__label">Subjects</span></a>
+          <a class="btn btn--line" href="reader.html">
+            <span data-ico="book"></span><span class="btn__label">Sample chapter</span>
+          </a>
+          <button class="btn btn--fill" type="button" data-action="start">
+            <span data-ico="plus"></span><span class="btn__label">Start learning</span>
+          </button>
+          <button class="icon-btn icon-btn--bare" type="button" data-action="theme" aria-label="Switch theme">
+            <span data-ico="theme"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 · READING DESK -->
+  <div class="hdr hdr--2">
+    <div class="hdr__row">
+      <a class="wordmark" href="./index.html">
+        <span class="wordmark__mark" aria-hidden="true">S</span>
+        <span>
+          <span class="wordmark__name">Skillbook</span>
+          <span class="wordmark__tag">Self-Paced Library</span>
+        </span>
+      </a>
+      <div class="hdr2__now">
+        <div class="hdr2__label">Any subject</div>
+        <div class="hdr2__value">Written as a real book <small>· contents, chapters, tests</small></div>
+      </div>
+      <div class="hdr2__acts">
+        <a class="btn btn--plain" href="#how"><span class="btn__label">How it works</span></a>
+        <a class="btn btn--plain" href="#subjects"><span class="btn__label">Subjects</span></a>
+        <a class="btn btn--plain" href="reader.html">
+          <span data-ico="book"></span><span class="btn__label">Sample</span>
+        </a>
+        <span class="hdr2__sep" aria-hidden="true"></span>
+        <button class="btn btn--fill" type="button" data-action="start">
+          <span data-ico="plus"></span><span class="btn__label">Start learning</span>
+        </button>
+        <button class="icon-btn icon-btn--bare" type="button" data-action="theme" aria-label="Switch theme">
+          <span data-ico="theme"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 · LIBRARY COUNTER -->
+  <div class="hdr hdr--3">
+    <div class="hdr3__top">
+      <div class="hdr__row">
+        <a class="wordmark" href="./index.html">
+          <span class="wordmark__mark" aria-hidden="true">S</span>
+          <span>
+            <span class="wordmark__name">Skillbook</span>
+            <span class="wordmark__tag">Self-Paced Library</span>
+          </span>
+        </a>
+        <label class="search">
+          <span data-ico="search"></span>
+          <input type="search" placeholder="Search a subject, chapter or topic…"
+                 aria-label="Search a subject to learn" />
+          <kbd>⌘K</kbd>
+        </label>
+        <div class="hdr3__acts">
+          <a class="btn btn--plain" href="reader.html">
+            <span data-ico="book"></span><span class="btn__label">Sample</span>
+          </a>
+          <button class="btn btn--fill" type="button" data-action="start">
+            <span data-ico="plus"></span><span class="btn__label">Start learning</span>
+          </button>
+          <button class="icon-btn icon-btn--bare" type="button" data-action="theme" aria-label="Switch theme">
+            <span data-ico="theme"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="hdr3__bot">
+      <div class="hdr__row">
+        <nav class="hdr3__tabs" aria-label="Sections">
+          <a class="hdr3__tab" href="#how">How it works</a>
+          <a class="hdr3__tab" href="#subjects">Subjects</a>
+          <a class="hdr3__tab" href="#inside">Inside a book</a>
+          <a class="hdr3__tab" href="#who">Who it's for</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</header>
+
+
+<main id="main">
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="wrap hero">
+    <div class="reveal is-in">
+      <p class="eyebrow">Self-paced learning, in book form</p>
+
+      <h1 class="hero__title">Any subject.<br>Written as a <em>real book</em>.</h1>
+
+      <p class="hero__sub">Tell us what you want to learn and how far along you are. Skillbook
+        writes the whole course — a contents page, chapters with worked examples, end-of-chapter
+        exercises, and a graded test after every chapter.</p>
+
+      <form class="hero__form" role="search">
+        <input type="text" aria-label="What do you want to learn?"
+               placeholder="What do you want to learn?" autocomplete="off" />
+        <button class="btn btn--fill btn--lg" type="submit">
+          Start learning <span data-ico="arrowR" data-size="17"></span>
+        </button>
+      </form>
+
+      <div class="hero__chips">
+        <span class="hero__chips-label">Try:</span>
+        <button class="chip" type="button" data-topic="Python programming">Python</button>
+        <button class="chip" type="button" data-topic="Class 10 Science — CBSE">Class 10 Science</button>
+        <button class="chip" type="button" data-topic="Thermodynamics">Thermodynamics</button>
+        <button class="chip" type="button" data-topic="English tenses">English tenses</button>
+        <button class="chip" type="button" data-topic="UPSC Indian Polity">UPSC Polity</button>
+      </div>
+
+      <p class="hero__note">
+        <span data-ico="check" data-size="15"></span>
+        No sign-up to read your first chapter · Any board, class, exam or skill
+      </p>
+    </div>
+
+    <!-- book preview -->
+    <div class="preview reveal is-in" aria-hidden="true">
+      <div class="preview__stack preview__stack--3"></div>
+      <div class="preview__stack preview__stack--2"></div>
+      <div class="preview__sheet">
+        <p class="preview__kicker">Chapter 3 · Core Concepts</p>
+        <h2 class="preview__title">Working with Data Types</h2>
+        <div class="preview__body">
+          <p>Every value a program stores has a <b>type</b> — a promise about what the value means
+            and what you are allowed to do with it. Types are the grammar of a language.</p>
+          <p>Before we write a single line, it is worth slowing down here…</p>
+          <div class="preview__box">
+            <b>Worked example</b>
+            Given <i>x = 7</i> and <i>y = "7"</i>, the expression x + y behaves differently in each
+            language because…
+          </div>
+        </div>
+      </div>
+      <div class="preview__badge">
+        <span class="score">92%</span>
+        <span><b>Chapter 2 test</b>Marked live as you answer</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       STRIP
+       ============================================================ -->
+  <div class="strip" aria-hidden="true">
+    <div class="strip__track">
+      <span>
+        Any board <i>❦</i> Any class <i>❦</i> Any exam <i>❦</i> Any degree <i>❦</i>
+        Any language <i>❦</i> Any skill <i>❦</i> Any interview <i>❦</i>
+      </span>
+      <span>
+        Any board <i>❦</i> Any class <i>❦</i> Any exam <i>❦</i> Any degree <i>❦</i>
+        Any language <i>❦</i> Any skill <i>❦</i> Any interview <i>❦</i>
+      </span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       HOW IT WORKS
+       ============================================================ -->
+  <section class="wrap section" id="how">
+    <div class="section__head section__head--center reveal">
+      <p class="eyebrow">How it works</p>
+      <h2 class="section__title">Four questions, then your book.</h2>
+      <p class="section__sub">Each answer changes what we ask next. Pick Science and we ask which
+        class and which board. Pick Engineering and we ask which branch. Nobody answers a question
+        that doesn't apply to them.</p>
+    </div>
+
+    <div class="steps">
+      <article class="step reveal" data-delay="0">
+        <div class="step__no">1</div>
+        <h3>Tell us about you</h3>
+        <p>Your name, and whether you're at school, in college, preparing for an exam or learning
+          for work. This sets the tone of every chapter.</p>
+      </article>
+      <article class="step reveal" data-delay="80">
+        <div class="step__no">2</div>
+        <h3>Narrow the field</h3>
+        <p>Area, then branch, then the follow-up questions that actually matter — board, class,
+          semester, exam paper or job role.</p>
+      </article>
+      <article class="step reveal" data-delay="160">
+        <div class="step__no">3</div>
+        <h3>Read your book</h3>
+        <p>A contents page, then chapters with topic headings, explanations, worked examples and
+          margin notes. Exactly like the textbook you wish you had.</p>
+      </article>
+      <article class="step reveal" data-delay="240">
+        <div class="step__no">4</div>
+        <h3>Test each chapter</h3>
+        <p>Five questions at the end of every chapter, marked the moment you answer, with an
+          explanation for each one you miss.</p>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SUBJECTS
+       ============================================================ -->
+  <section class="section section--alt" id="subjects">
+    <div class="wrap">
+      <div class="section__head section__head--center reveal">
+        <p class="eyebrow">What you can learn</p>
+        <h2 class="section__title">Ten fields. Sixty branches.<br>Any topic you can type.</h2>
+        <p class="section__sub">These are the starting points, not the limits. If you can name it,
+          Skillbook can write a book about it.</p>
+      </div>
+
+      <div class="subjects">
+        <button class="subject reveal" type="button" data-topic="Physics">
+          <span class="subject__icon" data-ico="flask" data-size="19"></span>
+          <span><h3>Science</h3><p>Physics, chemistry, biology, astronomy</p></span>
+        </button>
+        <button class="subject reveal" type="button" data-delay="40" data-topic="Mechanical engineering">
+          <span class="subject__icon" data-ico="gear" data-size="19"></span>
+          <span><h3>Engineering</h3><p>Mechanical, electrical, civil, CS &amp; AI</p></span>
+        </button>
+        <button class="subject reveal" type="button" data-delay="80" data-topic="Python programming">
+          <span class="subject__icon" data-ico="code" data-size="19"></span>
+          <span><h3>Technology &amp; IT</h3><p>Programming, data, cloud, security</p></span>
+        </button>
+        <button class="subject reveal" type="button" data-delay="120" data-topic="Calculus">
+          <span class="subject__icon" data-ico="sigma" data-size="19"></span>
+          <span><h3>Mathematics</h3><p>Algebra, calculus, statistics, discrete</p></span>
+        </button>
+        <button class="subject reveal" type="button" data-delay="160" data-topic="English grammar">
+          <span class="subject__icon" data-ico="pen" data-size="19"></span>
+          <span><h3>Languages</h3><p>Grammar, fluency, writing craft</p></span>
+        </button>
+        <button class="subject reveal" type="button" data-delay="0" data-topic="History">
+          <span class="subject__icon" data-ico="palette" data-size="19"></span>
+          <span><h3>Arts &amp; Humanities</h3><p>History, philosophy, psychology, music</p></span>
+        </button>
+        <button class="subject reveal" type="button" data-delay="40" data-topic="Accounting">
+          <span class="subject__icon" data-ico="chart" data-size="19"></span>
+          <span><h3>Commerce</h3><p>Accounting, economics, finance, marketing</p></span>
+        </button>
+        <button class="subject reveal" type="button" data-delay="80" data-topic="Human anatomy">
+          <span class="subject__icon" data-ico="pulse" data-size="19"></span>
+          <span><h3>Medical &amp; Health</h3><p>Anatomy, physiology, nutrition, nursing</p></span>
+        </button>
+        <button class="subject reveal" type="button" data-delay="120" data-topic="UPSC Indian Polity">
+          <span class="subject__icon" data-ico="target" data-size="19"></span>
+          <span><h3>Competitive Exams</h3><p>UPSC, JEE, NEET, GATE, SSC, banking</p></span>
+        </button>
+        <button class="subject reveal" type="button" data-delay="160" data-topic="Personal finance">
+          <span class="subject__icon" data-ico="sprout" data-size="19"></span>
+          <span><h3>Life &amp; Soft Skills</h3><p>Communication, leadership, money</p></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       INSIDE A SKILLBOOK
+       ============================================================ -->
+  <section class="wrap section" id="inside">
+    <div class="inside">
+      <div class="reveal">
+        <p class="eyebrow">Inside a Skillbook</p>
+        <h2 class="section__title">Not a chatbot transcript.<br>An actual book.</h2>
+        <p class="section__sub">Answers you have to keep re-asking for aren't learning. Skillbook
+          gives you something with a beginning, a middle and an end.</p>
+
+        <div class="feature-list">
+          <div class="feature">
+            <span class="feature__icon" data-ico="list" data-size="18"></span>
+            <div>
+              <h3>A contents page you can plan around</h3>
+              <p>Every chapter titled and timed before you start, so you know what the whole
+                journey looks like.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <span class="feature__icon" data-ico="book" data-size="18"></span>
+            <div>
+              <h3>Worked examples, not just explanations</h3>
+              <p>Each concept lands with a full example — the problem, every step, and why that
+                step was the right one.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <span class="feature__icon" data-ico="check" data-size="18"></span>
+            <div>
+              <h3>Tests that mark themselves</h3>
+              <p>Five questions per chapter, scored live, with an explanation for every answer you
+                get wrong.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <span class="feature__icon" data-ico="search" data-size="18"></span>
+            <div>
+              <h3>Search inside your book</h3>
+              <p>Look up any topic and jump straight to the page that covers it — the way you'd
+                use an index.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview reveal" data-delay="120" aria-hidden="true">
+        <div class="preview__stack preview__stack--2"></div>
+        <div class="preview__sheet" style="animation:none">
+          <p class="preview__kicker">Contents</p>
+          <h2 class="preview__title">Python Programming</h2>
+          <div class="preview__body">
+            <p><b>01</b> &nbsp;Introduction to Python <span class="text-muted">· 9 min</span></p>
+            <p><b>02</b> &nbsp;Your First Program <span class="text-muted">· 12 min</span></p>
+            <p><b>03</b> &nbsp;Working with Data Types <span class="text-muted">· 15 min</span></p>
+            <p><b>04</b> &nbsp;Control Flow <span class="text-muted">· 14 min</span></p>
+            <p><b>05</b> &nbsp;Functions <span class="text-muted">· 18 min</span></p>
+            <p><b>06</b> &nbsp;Collections <span class="text-muted">· 16 min</span></p>
+            <div class="preview__box">
+              <b>How marking works</b>
+              Each chapter ends with a five-question test. Marks appear live and are shown against
+              the chapter in the sidebar.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       WHO IT'S FOR
+       ============================================================ -->
+  <section class="section section--alt" id="who">
+    <div class="wrap">
+      <div class="section__head section__head--center reveal">
+        <p class="eyebrow">Who it's for</p>
+        <h2 class="section__title">The same book engine, four different readers.</h2>
+      </div>
+
+      <div class="audience">
+        <article class="aud reveal">
+          <span class="aud__tag">School</span>
+          <h3>Class 6 to 12</h3>
+          <p>Pick your board and class and get chapters that match the syllabus you're actually
+            examined on.</p>
+          <ul>
+            <li><span data-ico="check" data-size="13"></span>CBSE, ICSE, state boards</li>
+            <li><span data-ico="check" data-size="13"></span>Chapter-end exercises</li>
+            <li><span data-ico="check" data-size="13"></span>Written in plain language</li>
+          </ul>
+        </article>
+
+        <article class="aud reveal" data-delay="80">
+          <span class="aud__tag">College</span>
+          <h3>Degree students</h3>
+          <p>Branch, semester and subject — then a book that goes as deep as your course demands.</p>
+          <ul>
+            <li><span data-ico="check" data-size="13"></span>All engineering branches</li>
+            <li><span data-ico="check" data-size="13"></span>Medical, commerce, arts</li>
+            <li><span data-ico="check" data-size="13"></span>Derivations and proofs</li>
+          </ul>
+        </article>
+
+        <article class="aud reveal" data-delay="160">
+          <span class="aud__tag">Exams</span>
+          <h3>Competitive prep</h3>
+          <p>Tell us the exam and the paper. Chapters get written to that syllabus and that
+            question style.</p>
+          <ul>
+            <li><span data-ico="check" data-size="13"></span>UPSC, JEE, NEET, GATE</li>
+            <li><span data-ico="check" data-size="13"></span>SSC, banking, CAT</li>
+            <li><span data-ico="check" data-size="13"></span>Exam-pattern tests</li>
+          </ul>
+        </article>
+
+        <article class="aud reveal" data-delay="240">
+          <span class="aud__tag">Work</span>
+          <h3>Professionals</h3>
+          <p>New stack to learn, an interview next week, or a skill you keep meaning to pick
+            up.</p>
+          <ul>
+            <li><span data-ico="check" data-size="13"></span>Any language or framework</li>
+            <li><span data-ico="check" data-size="13"></span>Interview preparation</li>
+            <li><span data-ico="check" data-size="13"></span>Soft skills and finance</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CLOSING
+       ============================================================ -->
+  <section class="wrap section--tight">
+    <div class="closing reveal">
+      <div class="closing__orn" aria-hidden="true">❦</div>
+      <h2>Your next book is about four questions away.</h2>
+      <p>Start with a topic. Everything after that is reading.</p>
+      <div class="closing__acts">
+        <button class="btn btn--fill btn--lg" type="button" data-action="start">
+          Start learning <span data-ico="arrowR" data-size="17"></span>
+        </button>
+        <a class="btn btn--line btn--lg" href="reader.html">
+          <span data-ico="book" data-size="17"></span> Read a sample chapter
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="wrap footer">
+    <div class="footer__in">
+      <div class="footer__brand">
+        <a class="wordmark" href="./index.html">
+          <span class="wordmark__mark" aria-hidden="true">S</span>
+          <span>
+            <span class="wordmark__name">Skillbook</span>
+            <span class="wordmark__tag">Self-Paced Library</span>
+          </span>
+        </a>
+        <p>A textbook for anything you want to learn, written the moment you ask for it.</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Product</h4>
+        <a href="#how">How it works</a>
+        <a href="#subjects">Subjects</a>
+        <a href="#inside">Inside a book</a>
+        <a href="reader.html">Sample chapter</a>
+      </div>
+
+      <div class="footer__col">
+        <h4>Learners</h4>
+        <a href="#who">School students</a>
+        <a href="#who">College students</a>
+        <a href="#who">Exam preparation</a>
+        <a href="#who">Professionals</a>
+      </div>
+
+      <div class="footer__col">
+        <h4>About</h4>
+        <a href="#">How books are written</a>
+        <a href="#">Privacy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+
+    <div class="footer__base">
+      <span>© 2026 Skillbook</span>
+      <span>Press <b>Shift + D</b> to switch header and theme designs</span>
+    </div>
+  </footer>
+
+</main>
+
+<!-- ============================================================
+     INTAKE WIZARD MODAL (3-Step Adaptive Setup)
+     ============================================================ -->
+<div class="wizard-overlay" id="wizardModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="wizard-modal">
+    <div class="wizard__hdr">
+      <div class="wizard__brand">
+        <div class="wordmark__mark" aria-hidden="true">S</div>
+        <div>
+          <h2 class="wizard__title">Create Your Skillbook</h2>
+          <p class="wizard__sub">Self-paced textbook written to your exact specs</p>
+        </div>
+      </div>
+      <div class="wizard__steps">
+        <div class="wizard__step-dot is-active" data-step="1"><span class="num">1</span> <span>Area</span></div>
+        <span class="hdr2__sep" aria-hidden="true"></span>
+        <div class="wizard__step-dot" data-step="2"><span class="num">2</span> <span>Branch</span></div>
+        <span class="hdr2__sep" aria-hidden="true"></span>
+        <div class="wizard__step-dot" data-step="3"><span class="num">3</span> <span>Topic</span></div>
+      </div>
+      <button class="icon-btn icon-btn--bare" type="button" id="wizardCloseBtn" aria-label="Close modal">
+        <span data-ico="close"></span>
+      </button>
+    </div>
+
+    <div class="wizard__body">
+      <!-- STEP 1: AREA -->
+      <div class="wizard__step is-active" data-step="1">
+        <h3 class="wizard__step-title">Choose your main field or area</h3>
+        <p class="wizard__step-desc">Select the domain you want to study. We'll tailor the explanations, examples, and terminology accordingly.</p>
+        <div class="wizard__search">
+          <label class="search">
+            <span data-ico="search"></span>
+            <input type="search" id="wizardAreaSearch" placeholder="Filter areas (e.g. Science, Engineering, IT...)" />
+          </label>
+        </div>
+        <div class="wizard__grid" id="wizardAreaGrid"></div>
+      </div>
+
+      <!-- STEP 2: BRANCH -->
+      <div class="wizard__step" data-step="2">
+        <h3 class="wizard__step-title">Select your branch or specialization</h3>
+        <p class="wizard__step-desc">Which branch inside this area fits your goal best?</p>
+        <div class="wizard__search">
+          <label class="search">
+            <span data-ico="search"></span>
+            <input type="search" id="wizardBranchSearch" placeholder="Filter branches..." />
+          </label>
+        </div>
+        <div class="wizard__grid" id="wizardBranchGrid"></div>
+      </div>
+
+      <!-- STEP 3: TOPIC & OPTIONS -->
+      <div class="wizard__step" data-step="3">
+        <h3 class="wizard__step-title">Describe your topic & learning goal</h3>
+        <p class="wizard__step-desc">Specify what topic, skill, subject or exam syllabus you want to master.</p>
+
+        <div class="wizard-form">
+          <div class="wizard-field">
+            <label for="wizardTopicInput">What specific topic or subject do you want to learn?</label>
+            <input type="text" id="wizardTopicInput" placeholder="e.g. Thermodynamics for GATE, Python Data Structures, Class 10 CBSE Physics" />
+          </div>
+
+          <div class="wizard-field">
+            <label>Target Proficiency Level</label>
+            <div class="wizard-options-row">
+              <button class="wizard-pill" type="button" data-setting="level" data-value="beginner">Beginner (From scratch)</button>
+              <button class="wizard-pill is-selected" type="button" data-setting="level" data-value="intermediate">Intermediate (Core concepts)</button>
+              <button class="wizard-pill" type="button" data-setting="level" data-value="advanced">Advanced (Deep dive & Mastery)</button>
+            </div>
+          </div>
+
+          <div class="wizard-field">
+            <label>Learning Context / Goal</label>
+            <div class="wizard-options-row">
+              <button class="wizard-pill is-selected" type="button" data-setting="target" data-value="general">Self-Paced Learner</button>
+              <button class="wizard-pill" type="button" data-setting="target" data-value="school">School (CBSE / ICSE / Board)</button>
+              <button class="wizard-pill" type="button" data-setting="target" data-value="university">College / University Course</button>
+              <button class="wizard-pill" type="button" data-setting="target" data-value="exam">Competitive Exam Prep</button>
+              <button class="wizard-pill" type="button" data-setting="target" data-value="interview">Job Interview Prep</button>
+            </div>
+          </div>
+
+          <div class="wizard-field">
+            <label>Book Length</label>
+            <div class="wizard-options-row">
+              <button class="wizard-pill" type="button" data-setting="chapters" data-value="4">Short (4 Chapters)</button>
+              <button class="wizard-pill is-selected" type="button" data-setting="chapters" data-value="6">Standard (6 Chapters)</button>
+              <button class="wizard-pill" type="button" data-setting="chapters" data-value="8">Full Book (8 Chapters)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wizard__ftr">
+      <button class="btn btn--plain" type="button" id="wizardBackBtn" hidden>
+        <span data-ico="arrowL" data-size="16"></span> <span>Back</span>
+      </button>
+      <button class="btn btn--fill" type="button" id="wizardNextBtn">
+        <span>Next</span> <span data-ico="arrowR" data-size="16"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/reader.js"></script>
+<script src="js/landing.js"></script>
+<script src="js/wizard.js"></script>
+<script src="js/api.js"></script>
+<script src="js/devtools.js"></script>
+<script>Skillbook.paintIcons();</script>
+</body>
+</html>

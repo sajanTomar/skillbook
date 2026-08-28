@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Skillbook — Header Options</title>
+<style>
+:root{
+  --bg:#FFFFFF; --bg-tint:#F5F4F2; --surface:#FFFFFF; --surface-2:#FBFAF9;
+  --ink:#191814; --ink-2:#55534C; --muted:#918E86;
+  --line:#E7E5E0; --line-soft:#F1EFEB;
+  --accent:#2A4C7D; --accent-ink:#1E3859; --accent-soft:#EDF1F7;
+  --clay:#9A5B3C; --clay-soft:#F8F1EC;
+  --green:#2E6B4F;
+  --shadow-1:0 1px 1px rgba(25,24,20,.04), 0 2px 5px -2px rgba(25,24,20,.06);
+  --shadow-2:0 1px 2px rgba(25,24,20,.05), 0 10px 26px -14px rgba(25,24,20,.20);
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,ui-serif,serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+html[data-theme="dark"]{
+  --bg:#0E0E0D; --bg-tint:#1A1A18; --surface:#141413; --surface-2:#1A1A18;
+  --ink:#EDEAE3; --ink-2:#B4B0A7; --muted:#85817A;
+  --line:#2A2A27; --line-soft:#201F1D;
+  --accent:#8DB2DE; --accent-ink:#AFC9E8; --accent-soft:#16202C;
+  --clay:#CE9271; --clay-soft:#241A15; --green:#63BC94;
+  --shadow-1:0 1px 2px rgba(0,0,0,.4);
+  --shadow-2:0 2px 6px rgba(0,0,0,.35), 0 18px 44px -22px rgba(0,0,0,.8);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg-tint);color:var(--ink);font-family:var(--sans);font-size:15px;
+  -webkit-font-smoothing:antialiased;transition:background .3s var(--ease),color .3s var(--ease)}
+button{font:inherit;color:inherit;border:none;background:none;cursor:pointer;padding:0}
+svg{display:block}
+
+/* ---------- preview page chrome ---------- */
+.pagehead{max-width:1180px;margin:0 auto;padding:46px 24px 10px}
+.pagehead h1{font-family:var(--serif);font-weight:400;font-size:38px;letter-spacing:-.025em;margin:0}
+.pagehead p{color:var(--ink-2);margin:10px 0 0;max-width:62ch;line-height:1.65}
+.themeswap{position:fixed;right:22px;top:22px;z-index:99;background:var(--surface);border:1px solid var(--line);
+  border-radius:99px;padding:9px 18px;font-size:13px;font-weight:600;box-shadow:var(--shadow-2)}
+
+.opt{max-width:1180px;margin:0 auto;padding:30px 24px 8px}
+.opt-label{display:flex;align-items:baseline;gap:14px;margin-bottom:14px}
+.opt-num{width:38px;height:38px;flex:none;border-radius:11px;background:var(--ink);color:var(--bg);
+  display:grid;place-items:center;font-family:var(--serif);font-size:19px}
+.opt-name{font-size:17px;font-weight:660;letter-spacing:-.015em}
+.opt-desc{font-size:13.5px;color:var(--muted);margin-top:2px}
+
+/* the frame each header sits in */
+.frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--bg);box-shadow:var(--shadow-2)}
+.frame-body{padding:34px 34px 44px;background:var(--bg)}
+.fb-eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--clay);font-weight:650}
+.fb-h{font-family:var(--serif);font-weight:400;font-size:30px;letter-spacing:-.02em;margin:9px 0 8px}
+.fb-p{color:var(--ink-2);font-family:var(--serif);line-height:1.7;margin:0;max-width:58ch}
+
+/* shared atoms */
+.mark{border-radius:8px;background:var(--ink);color:var(--bg);display:grid;place-items:center;
+  font-family:var(--serif);font-weight:500;line-height:1;flex:none}
+.ib{border-radius:10px;display:grid;place-items:center;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink-2);transition:.2s var(--ease);flex:none}
+.ib:hover{border-color:var(--accent);color:var(--accent)}
+.wordmark{font-weight:650;letter-spacing:-.02em}
+.tag{font-weight:450;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+
+/* ============================================================
+   1 — CENTERED MASTHEAD
+   ============================================================ */
+.h1{background:var(--bg);border-bottom:1px solid var(--line-soft);position:relative}
+.h1-in{display:flex;align-items:center;padding:0 26px;min-height:70px;gap:16px}
+.h1-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.h1-step{font-size:12.5px;color:var(--muted);letter-spacing:.02em}
+.h1-step b{color:var(--ink);font-weight:640}
+.h1-mid{position:absolute;left:50%;transform:translateX(-50%);text-align:center}
+.h1-mid .n{font-family:var(--serif);font-size:23px;letter-spacing:-.01em;line-height:1.1}
+.h1-mid .t{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:1px}
+.h1-right{display:flex;align-items:center;gap:8px;flex:1;justify-content:flex-end}
+.h1-right .ib{width:34px;height:34px}
+.h1-track{height:2px;background:var(--line-soft)}
+.h1-track i{display:block;height:100%;width:50%;background:var(--accent)}
+
+/* ============================================================
+   2 — CONNECTED PROGRESS TRACK
+   ============================================================ */
+.h2{background:var(--bg);border-bottom:1px solid var(--line-soft)}
+.h2-in{display:flex;align-items:center;gap:26px;padding:0 26px;min-height:68px}
+.h2-brand{display:flex;align-items:center;gap:11px;flex:none}
+.h2-brand .mark{width:34px;height:34px;font-size:18px}
+.h2-brand .wordmark{font-size:16.5px}
+.h2-steps{display:flex;align-items:center;margin:0 auto;position:relative}
+.h2-s{display:flex;align-items:center;gap:9px;position:relative;padding-right:8px}
+.h2-s i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-style:normal;
+  font-size:11.5px;font-weight:650;background:var(--bg-tint);color:var(--muted);border:1.5px solid var(--line);
+  z-index:1;transition:.25s var(--ease)}
+.h2-s span{font-size:12.5px;color:var(--muted)}
+.h2-s.done i{background:var(--green);border-color:var(--green);color:#fff}
+.h2-s.done span{color:var(--ink-2)}
+.h2-s.now i{background:var(--accent);border-color:var(--accent);color:#fff;
+  box-shadow:0 0 0 4px var(--accent-soft)}
+.h2-s.now span{color:var(--ink);font-weight:640}
+.h2-bar{width:44px;height:2px;background:var(--line);border-radius:2px;margin:0 10px 0 4px}
+.h2-bar.fill{background:var(--green)}
+.h2-right{display:flex;gap:8px;flex:none}
+.h2-right .ib{width:34px;height:34px}
+
+/* ============================================================
+   3 — TWO-TIER
+   ============================================================ */
+.h3{background:var(--bg);border-bottom:1px solid var(--line)}
+.h3-top{display:flex;align-items:center;gap:16px;padding:0 26px;min-height:62px}
+.h3-top .mark{width:36px;height:36px;font-size:19px}
+.h3-brand{display:flex;align-items:center;gap:12px}
+.h3-brand .wordmark{font-size:18px;line-height:1.1}
+.h3-actions{margin-left:auto;display:flex;align-items:center;gap:10px}
+.h3-save{font-size:13px;font-weight:600;color:var(--ink-2);padding:8px 14px;border-radius:9px;
+  border:1px solid var(--line)}
+.h3-save:hover{border-color:var(--accent);color:var(--accent)}
+.h3-actions .ib{width:34px;height:34px}
+.h3-bot{display:flex;border-top:1px solid var(--line-soft);background:var(--surface-2)}
+.h3-c{flex:1;padding:12px 20px 11px;position:relative;text-align:left;border-right:1px solid var(--line-soft)}
+.h3-c:last-child{border-right:none}
+.h3-c .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:650}
+.h3-c .v{font-size:13.5px;color:var(--muted);margin-top:2px}
+.h3-c::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:transparent}
+.h3-c.done .k{color:var(--green)}
+.h3-c.done .v{color:var(--ink-2)}
+.h3-c.done::after{background:var(--green)}
+.h3-c.now{background:var(--bg)}
+.h3-c.now .k{color:var(--accent)}
+.h3-c.now .v{color:var(--ink);font-weight:640}
+.h3-c.now::after{background:var(--accent)}
+
+/* ============================================================
+   4 — FLOATING ISLAND
+   ============================================================ */
+.h4{padding:16px;background:transparent}
+.h4-in{display:flex;align-items:center;gap:18px;padding:9px 10px 9px 16px;border-radius:99px;
+  background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(16px) saturate(180%);
+  border:1px solid var(--line);box-shadow:var(--shadow-2)}
+.h4-in .mark{width:30px;height:30px;font-size:16px;border-radius:9px}
+.h4-brand{display:flex;align-items:center;gap:10px;flex:none}
+.h4-brand .wordmark{font-size:15.5px}
+.h4-pills{display:flex;align-items:center;gap:4px;margin:0 auto;background:var(--bg-tint);
+  padding:4px;border-radius:99px}
+.h4-p{display:flex;align-items:center;gap:7px;padding:6px 14px;border-radius:99px;font-size:12.5px;
+  color:var(--muted);transition:.22s var(--ease)}
+.h4-p i{width:17px;height:17px;border-radius:50%;background:var(--line);color:var(--surface);
+  display:grid;place-items:center;font-style:normal;font-size:10px;font-weight:700}
+.h4-p.done i{background:var(--green);color:#fff}
+.h4-p.done{color:var(--ink-2)}
+.h4-p.now{background:var(--surface);color:var(--ink);font-weight:640;box-shadow:var(--shadow-1)}
+.h4-p.now i{background:var(--accent);color:#fff}
+.h4-right{display:flex;gap:6px;flex:none}
+.h4-right .ib{width:32px;height:32px;border-radius:99px}
+
+/* ============================================================
+   5 — EDITORIAL MASTHEAD
+   ============================================================ */
+.h5{background:var(--bg);position:relative}
+.h5-rule{height:3px;background:var(--ink)}
+.h5-in{position:relative;padding:20px 26px 16px;text-align:center}
+.h5-name{font-family:var(--serif);font-weight:400;font-size:32px;letter-spacing:.01em;line-height:1}
+.h5-sub{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-top:7px}
+.h5-l{position:absolute;left:26px;top:50%;transform:translateY(-50%);font-size:11px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--clay);font-weight:650}
+.h5-r{position:absolute;right:26px;top:50%;transform:translateY(-50%);display:flex;gap:8px}
+.h5-r .ib{width:32px;height:32px}
+.h5-foot{display:flex;align-items:center;gap:0;border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line)}
+.h5-f{flex:1;text-align:center;padding:9px 4px;font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;position:relative}
+.h5-f.done{color:var(--green)}
+.h5-f.now{color:var(--accent-ink);background:var(--accent-soft)}
+.h5-f.now::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--accent)}
+
+/* ============================================================
+   6 — INVERTED / DARK BAR
+   ============================================================ */
+.h6{background:var(--ink);color:var(--bg)}
+html[data-theme="dark"] .h6{background:#000;border-bottom:1px solid var(--line)}
+.h6-in{display:flex;align-items:center;gap:22px;padding:0 26px;min-height:66px}
+.h6-brand{display:flex;align-items:center;gap:11px;flex:none}
+.h6-brand .mark{width:33px;height:33px;font-size:18px;background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] .h6-brand .mark{background:var(--accent);color:#000}
+.h6-brand .wordmark{font-size:16.5px;color:var(--bg)}
+.h6-brand .tag{color:color-mix(in srgb,var(--bg) 45%,transparent)}
+.h6-steps{display:flex;align-items:center;gap:5px;margin:0 auto}
+.h6-s{display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;font-size:12.5px;
+  color:color-mix(in srgb,var(--bg) 52%,transparent)}
+.h6-s i{width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-style:normal;
+  font-size:10.5px;font-weight:650;border:1.5px solid color-mix(in srgb,var(--bg) 26%,transparent)}
+.h6-s.done{color:color-mix(in srgb,var(--bg) 80%,transparent)}
+.h6-s.done i{background:var(--green);border-color:var(--green);color:#fff}
+.h6-s.now{background:color-mix(in srgb,var(--bg) 13%,transparent);color:var(--bg);font-weight:600}
+.h6-s.now i{background:var(--bg);border-color:var(--bg);color:var(--ink)}
+.h6-sep{width:12px;height:1.5px;background:color-mix(in srgb,var(--bg) 22%,transparent);border-radius:2px}
+.h6-right{display:flex;gap:8px;flex:none}
+.h6-right .ib{width:34px;height:34px;background:transparent;
+  border-color:color-mix(in srgb,var(--bg) 24%,transparent);color:color-mix(in srgb,var(--bg) 72%,transparent)}
+.h6-right .ib:hover{border-color:var(--bg);color:var(--bg)}
+
+.footnote{max-width:1180px;margin:0 auto;padding:40px 24px 80px;color:var(--muted);font-size:14px;line-height:1.7}
+.footnote b{color:var(--ink)}
+
+@media (max-width:860px){
+  .h1-mid{position:static;transform:none;text-align:left}
+  .h2-steps,.h6-steps{display:none}
+  .h4-pills{display:none}
+}
+</style>
+</head>
+<body>
+
+<button class="themeswap" onclick="tt()">Toggle dark / light</button>
+
+<div class="pagehead">
+  <h1>Header options</h1>
+  <p>Six directions, all built with the same colour system so you're judging layout and structure,
+     not palette. Each sits above a slice of real page content so you can see it in context.
+     Reply with the number you want — say <b>1</b>, <b>2</b>, <b>3</b> and so on. Happy to mix,
+     e.g. "option 3 but with the actions from 4".</p>
+</div>
+
+<!-- ============ 1 ============ -->
+<div class="opt">
+  <div class="opt-label">
+    <div class="opt-num">1</div>
+    <div><div class="opt-name">Centered masthead</div>
+      <div class="opt-desc">Brand dead centre like a book title page · step shown as plain text · thin progress line at the base</div></div>
+  </div>
+  <div class="frame">
+    <div class="h1">
+      <div class="h1-in">
+        <div class="h1-left"><span class="h1-step">Step <b>2</b> of 4 · Branch</span></div>
+        <div class="h1-mid">
+          <div class="n">Skillbook</div>
+          <div class="t">Self-Paced Library</div>
+        </div>
+        <div class="h1-right">
+          <button class="ib" id="i1a"></button><button class="ib" id="i1b"></button>
+        </div>
+      </div>
+      <div class="h1-track"><i></i></div>
+    </div>
+    <div class="frame-body">
+      <div class="fb-eyebrow">Chapter 3 · Core Concepts</div>
+      <div class="fb-h">Working with Data Types</div>
+      <p class="fb-p">Every value a program stores has a type — a promise about what the value means
+        and what you are allowed to do with it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 2 ============ -->
+<div class="opt">
+  <div class="opt-label">
+    <div class="opt-num">2</div>
+    <div><div class="opt-name">Connected progress track</div>
+      <div class="opt-desc">Steps joined by a filling line, so completion reads at a glance · closest to a modern product</div></div>
+  </div>
+  <div class="frame">
+    <div class="h2">
+      <div class="h2-in">
+        <div class="h2-brand"><span class="mark">S</span>
+          <span><span class="wordmark">Skillbook</span></span></div>
+        <div class="h2-steps">
+          <div class="h2-s done"><i>✓</i><span>Area</span></div><div class="h2-bar fill"></div>
+          <div class="h2-s now"><i>2</i><span>Branch</span></div><div class="h2-bar"></div>
+          <div class="h2-s"><i>3</i><span>Topic</span></div><div class="h2-bar"></div>
+          <div class="h2-s"><i>4</i><span>Read</span></div>
+        </div>
+        <div class="h2-right"><button class="ib" id="i2a"></button><button class="ib" id="i2b"></button></div>
+      </div>
+    </div>
+    <div class="frame-body">
+      <div class="fb-eyebrow">Chapter 3 · Core Concepts</div>
+      <div class="fb-h">Working with Data Types</div>
+      <p class="fb-p">Every value a program stores has a type — a promise about what the value means
+        and what you are allowed to do with it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 3 ============ -->
+<div class="opt">
+  <div class="opt-label">
+    <div class="opt-num">3</div>
+    <div><div class="opt-name">Two-tier with tab strip</div>
+      <div class="opt-desc">Brand row on top, full-width step tabs below showing your actual choices · most informative</div></div>
+  </div>
+  <div class="frame">
+    <div class="h3">
+      <div class="h3-top">
+        <div class="h3-brand"><span class="mark">S</span>
+          <span><span class="wordmark">Skillbook</span><br><span class="tag">Self-paced library</span></span></div>
+        <div class="h3-actions">
+          <button class="h3-save">Save progress</button>
+          <button class="ib" id="i3a"></button><button class="ib" id="i3b"></button>
+        </div>
+      </div>
+      <div class="h3-bot">
+        <div class="h3-c done"><div class="k">Area</div><div class="v">Engineering</div></div>
+        <div class="h3-c now"><div class="k">Branch</div><div class="v">Computer Science &amp; AI</div></div>
+        <div class="h3-c"><div class="k">Topic</div><div class="v">Not chosen yet</div></div>
+        <div class="h3-c"><div class="k">Read</div><div class="v">—</div></div>
+      </div>
+    </div>
+    <div class="frame-body">
+      <div class="fb-eyebrow">Chapter 3 · Core Concepts</div>
+      <div class="fb-h">Working with Data Types</div>
+      <p class="fb-p">Every value a program stores has a type — a promise about what the value means
+        and what you are allowed to do with it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 4 ============ -->
+<div class="opt">
+  <div class="opt-label">
+    <div class="opt-num">4</div>
+    <div><div class="opt-name">Floating island</div>
+      <div class="opt-desc">Detached rounded bar over the page, steps as a segmented control · lightest, most modern</div></div>
+  </div>
+  <div class="frame">
+    <div class="h4">
+      <div class="h4-in">
+        <div class="h4-brand"><span class="mark">S</span><span class="wordmark">Skillbook</span></div>
+        <div class="h4-pills">
+          <div class="h4-p done"><i>✓</i>Area</div>
+          <div class="h4-p now"><i>2</i>Branch</div>
+          <div class="h4-p"><i>3</i>Topic</div>
+          <div class="h4-p"><i>4</i>Read</div>
+        </div>
+        <div class="h4-right"><button class="ib" id="i4a"></button><button class="ib" id="i4b"></button></div>
+      </div>
+    </div>
+    <div class="frame-body" style="padding-top:14px">
+      <div class="fb-eyebrow">Chapter 3 · Core Concepts</div>
+      <div class="fb-h">Working with Data Types</div>
+      <p class="fb-p">Every value a program stores has a type — a promise about what the value means
+        and what you are allowed to do with it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 5 ============ -->
+<div class="opt">
+  <div class="opt-label">
+    <div class="opt-num">5</div>
+    <div><div class="opt-name">Editorial masthead</div>
+      <div class="opt-desc">Newspaper-style rules and letterspaced caps · leans hardest into the "real book" idea</div></div>
+  </div>
+  <div class="frame">
+    <div class="h5">
+      <div class="h5-rule"></div>
+      <div class="h5-in">
+        <div class="h5-l">No. 02 — Branch</div>
+        <div class="h5-name">Skillbook</div>
+        <div class="h5-sub">Self-Paced Library</div>
+        <div class="h5-r"><button class="ib" id="i5a"></button><button class="ib" id="i5b"></button></div>
+      </div>
+      <div class="h5-foot">
+        <div class="h5-f done">Area</div><div class="h5-f now">Branch</div>
+        <div class="h5-f">Topic</div><div class="h5-f">Read</div>
+      </div>
+    </div>
+    <div class="frame-body">
+      <div class="fb-eyebrow">Chapter 3 · Core Concepts</div>
+      <div class="fb-h">Working with Data Types</div>
+      <p class="fb-p">Every value a program stores has a type — a promise about what the value means
+        and what you are allowed to do with it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 6 ============ -->
+<div class="opt">
+  <div class="opt-label">
+    <div class="opt-num">6</div>
+    <div><div class="opt-name">Inverted dark bar</div>
+      <div class="opt-desc">Ink-black bar against the white page · highest contrast, most confident</div></div>
+  </div>
+  <div class="frame">
+    <div class="h6">
+      <div class="h6-in">
+        <div class="h6-brand"><span class="mark">S</span>
+          <span><span class="wordmark">Skillbook</span><br><span class="tag">Self-paced library</span></span></div>
+        <div class="h6-steps">
+          <div class="h6-s done"><i>✓</i>Area</div><span class="h6-sep"></span>
+          <div class="h6-s now"><i>2</i>Branch</div><span class="h6-sep"></span>
+          <div class="h6-s"><i>3</i>Topic</div><span class="h6-sep"></span>
+          <div class="h6-s"><i>4</i>Read</div>
+        </div>
+        <div class="h6-right"><button class="ib" id="i6a"></button><button class="ib" id="i6b"></button></div>
+      </div>
+    </div>
+    <div class="frame-body">
+      <div class="fb-eyebrow">Chapter 3 · Core Concepts</div>
+      <div class="fb-h">Working with Data Types</div>
+      <p class="fb-p">Every value a program stores has a type — a promise about what the value means
+        and what you are allowed to do with it.</p>
+    </div>
+  </div>
+</div>
+
+<div class="footnote">
+  Tell me a number and I'll build it properly into <b>index.html</b> — responsive, accessible,
+  wired to the theme toggle and the real step state. You can also combine: <b>"3, but floating like 4"</b>.
+</div>
+
+<script>
+const MOON='<path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.7 8.7 0 1 0 10.7 10.7z"/>';
+const SUN ='<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M21.4 12h-2.2M5.2 12H3M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6M18.4 18.4l-1.6-1.6M7.2 7.2 5.6 5.6"/>';
+const HOME='<path d="M3.6 10.4 12 3.6l8.4 6.8V20a1.2 1.2 0 0 1-1.2 1.2H4.8A1.2 1.2 0 0 1 3.6 20z"/><path d="M9.4 21.2v-7h5.2v7"/>';
+function svg(p,s){return `<svg width="${s||17}" height="${s||17}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`}
+function paint(){
+  const dark = document.documentElement.dataset.theme==='dark';
+  for(let n=1;n<=6;n++){
+    const a=document.getElementById('i'+n+'a'), b=document.getElementById('i'+n+'b');
+    if(a) a.innerHTML = svg(dark?SUN:MOON);
+    if(b) b.innerHTML = svg(HOME);
+  }
+}
+function tt(){
+  const el=document.documentElement;
+  el.dataset.theme = el.dataset.theme==='dark' ? 'light' : 'dark';
+  paint();
+}
+paint();
+</script>
+</body>
+</html>

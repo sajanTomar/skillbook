@@ -1,0 +1,257 @@
+/* ============================================================================
+   SKILLBOOK — components.css
+   Shared building blocks used by more than one part of the app.
+
+     1. Buttons
+     2. Icon buttons
+     3. Badges
+     4. Progress (track + ring)
+     5. Wordmark
+     6. Search field
+   ============================================================================ */
+
+
+/* ============================================================================
+   1. BUTTONS
+   Every button carries a word. Icon-only is the exception (§2), never the rule —
+   an unlabelled glyph is only legible to someone who already knows the product.
+   ============================================================================ */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  white-space: nowrap;
+  padding: 9px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semi);
+  line-height: 1.4;
+  transition: background var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease),
+              transform var(--dur-fast) var(--ease);
+}
+.btn:hover{ transform: translateY(-1px); }
+.btn:active{ transform: none; }
+.btn:disabled,
+.btn[aria-disabled="true"]{
+  opacity: .4;
+  pointer-events: none;
+}
+
+/* — filled: the one primary action on a screen — */
+.btn--fill{
+  background: var(--accent);
+  color: var(--accent-contrast);
+  box-shadow: 0 6px 16px -9px var(--accent);
+}
+.btn--fill:hover{ box-shadow: 0 10px 22px -10px var(--accent); }
+
+/* — ink: a strong secondary, when the accent is already spoken for — */
+.btn--ink{
+  background: var(--ink);
+  color: var(--ink-invert);
+}
+
+/* — outlined: equal-weight choices — */
+.btn--line{
+  background: var(--surface);
+  border-color: var(--line);
+  color: var(--ink-2);
+}
+.btn--line:hover{ border-color: var(--accent); color: var(--accent); }
+
+/* — plain: tertiary, sits quietly in a toolbar — */
+.btn--plain{
+  color: var(--ink-2);
+  padding-inline: var(--sp-3);
+}
+.btn--plain:hover{ background: var(--surface-3); color: var(--ink); }
+
+/* — sizes — */
+.btn--sm{ padding: 7px 13px; font-size: var(--fs-sm); border-radius: var(--r-sm); gap: 6px; }
+.btn--lg{ padding: 13px 24px; font-size: var(--fs-md); border-radius: var(--r-lg); }
+
+/* — loading: used when a chapter is generating — */
+.btn.is-loading{ pointer-events: none; position: relative; color: transparent; }
+.btn.is-loading::after{
+  content: "";
+  position: absolute;
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  color: var(--accent-contrast);
+  animation: spin .7s linear infinite;
+}
+.btn--line.is-loading::after,
+.btn--plain.is-loading::after{ color: var(--accent); }
+
+@keyframes spin{ to{ transform: rotate(360deg); } }
+
+
+/* ============================================================================
+   2. ICON BUTTONS
+   Only for actions whose meaning is universal (close, theme, next page).
+   An aria-label is required — the markup is invalid to us without one.
+   ============================================================================ */
+.icon-btn{
+  width: 34px; height: 34px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--ink-2);
+  transition: all var(--dur) var(--ease);
+}
+.icon-btn:hover{
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+.icon-btn--bare{ border-color: transparent; background: none; }
+.icon-btn--bare:hover{ background: var(--surface-3); border-color: transparent; color: var(--ink); }
+.icon-btn--sm{ width: 30px; height: 30px; border-radius: var(--r-sm); }
+
+
+/* ============================================================================
+   3. BADGE
+   ============================================================================ */
+.badge{
+  display: inline-grid;
+  place-items: center;
+  min-width: 19px;
+  padding: 2px 6px;
+  border-radius: var(--r-full);
+  background: var(--clay);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  line-height: 1.4;
+}
+.badge--quiet{ background: var(--surface-3); color: var(--ink-3); }
+
+
+/* ============================================================================
+   4. PROGRESS
+   ============================================================================ */
+.track{
+  height: 5px;
+  border-radius: var(--r-full);
+  background: var(--surface-3);
+  overflow: hidden;
+  flex: none;
+}
+.track > i{
+  display: block;
+  height: 100%;
+  border-radius: var(--r-full);
+  background: var(--ok);
+  transition: width var(--dur-slow) var(--ease);
+}
+.track--accent > i{ background: var(--accent); }
+
+/* full-bleed hairline that sits under a header */
+.hairline{ height: 3px; background: var(--line-soft); }
+.hairline > i{
+  display: block; height: 100%;
+  background: var(--accent);
+  transition: width var(--dur-slow) var(--ease);
+}
+
+.ring{ position: relative; flex: none; }
+.ring svg{ transform: rotate(-90deg); }
+.ring .ring-bg{ stroke: var(--line); }
+.ring .ring-fg{ stroke: var(--ok); stroke-linecap: round;
+  transition: stroke-dashoffset var(--dur-slow) var(--ease); }
+.ring output{
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  color: var(--ink-2);
+}
+
+
+/* ============================================================================
+   5. WORDMARK
+   ============================================================================ */
+.wordmark{ display: flex; align-items: center; gap: var(--sp-3); flex: none; }
+
+.wordmark__mark{
+  width: 36px; height: 36px;
+  flex: none;
+  display: grid; place-items: center;
+  border-radius: var(--r-sm);
+  background: var(--ink);
+  color: var(--desk);
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  line-height: 1;
+}
+.wordmark__name{
+  display: block;
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  letter-spacing: var(--ls-tight);
+  line-height: 1.1;
+  color: var(--ink);
+}
+.wordmark__tag{
+  display: block;
+  margin-top: 1px;
+  font-size: 9px;
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-caps-lg);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+
+/* ============================================================================
+   6. SEARCH FIELD
+   ============================================================================ */
+.search{
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-3);
+  color: var(--ink-3);
+  transition: all var(--dur) var(--ease);
+}
+.search:hover{ border-color: var(--line-strong); }
+.search:focus-within{
+  background: var(--surface);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-surface);
+}
+.search input{
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: var(--fs-md);
+  color: var(--ink);
+}
+.search input::placeholder{ color: var(--ink-3); }
+.search kbd{
+  flex: none;
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xs);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--ink-3);
+}

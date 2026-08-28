@@ -1,0 +1,379 @@
+/* ============================================================================
+   SKILLBOOK — wizard.css
+   Part 2B: Multi-Step Adaptive Intake Wizard Modal Styles
+   Tuned to match tokens.css design system perfectly (crisp, opaque, high-contrast)
+   ============================================================================ */
+
+.wizard-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(14, 14, 13, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur) var(--ease), visibility var(--dur) var(--ease);
+}
+
+.wizard-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.wizard-modal {
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--ink);
+  transform: translateY(16px) scale(0.98);
+  transition: transform var(--dur) var(--ease);
+}
+
+.wizard-overlay.is-open .wizard-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* ------------------------------------------------------------------
+   Wizard Header
+   ------------------------------------------------------------------ */
+.wizard__hdr {
+  padding: var(--sp-4) var(--sp-6);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-2);
+}
+
+.wizard__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.wizard__brand .wordmark__mark {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--r-sm);
+  background: var(--ink);
+  color: var(--ink-invert);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-serif);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+}
+
+.wizard__title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: var(--ink);
+  margin: 0;
+  line-height: var(--lh-tight);
+}
+
+.wizard__sub {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  margin: 2px 0 0 0;
+}
+
+/* Steps Indicator */
+.wizard__steps {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.wizard__step-dot {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semi);
+  color: var(--ink-3);
+}
+
+.wizard__step-dot .num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--surface-3);
+  border: 1px solid var(--line-strong);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  color: var(--ink-2);
+}
+
+.wizard__step-dot.is-active {
+  color: var(--accent);
+}
+
+.wizard__step-dot.is-active .num {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+.wizard__step-dot.is-done .num {
+  background: var(--ok-surface);
+  color: var(--ok);
+  border-color: var(--ok);
+}
+
+/* ------------------------------------------------------------------
+   Wizard Body & Step Views
+   ------------------------------------------------------------------ */
+.wizard__body {
+  padding: var(--sp-6);
+  overflow-y: auto;
+  flex: 1;
+  background: var(--surface);
+}
+
+.wizard__step {
+  display: none;
+  animation: wizardStepIn var(--dur) var(--ease) forwards;
+}
+
+.wizard__step.is-active {
+  display: block;
+}
+
+@keyframes wizardStepIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.wizard__step-title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  color: var(--ink);
+  margin: 0 0 var(--sp-2) 0;
+}
+
+.wizard__step-desc {
+  font-size: var(--fs-md);
+  color: var(--ink-2);
+  margin: 0 0 var(--sp-5) 0;
+  line-height: var(--lh-normal);
+}
+
+/* Search Input inside Wizard */
+.wizard__search {
+  margin-bottom: var(--sp-5);
+}
+
+.wizard__search .search {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+}
+
+.wizard__search input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-size: var(--fs-md);
+  color: var(--ink);
+  outline: none;
+}
+
+.wizard__search input::placeholder {
+  color: var(--ink-3);
+}
+
+/* Card Selection Grid */
+.wizard__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: var(--sp-3);
+}
+
+.wizard-card {
+  padding: var(--sp-4);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--dur-fast) var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.wizard-card:hover {
+  border-color: var(--accent);
+  background: var(--surface);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-1);
+}
+
+.wizard-card.is-selected {
+  border: 2px solid var(--accent);
+  background: var(--accent-surface);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.wizard-card__hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wizard-card__icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--r-md);
+  background: var(--surface-3);
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+}
+
+.wizard-card.is-selected .wizard-card__icon {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.wizard-card__title {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-md);
+  color: var(--ink);
+}
+
+.wizard-card__desc {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  line-height: var(--lh-snug);
+}
+
+/* ------------------------------------------------------------------
+   Step 3 Options & Controls
+   ------------------------------------------------------------------ */
+.wizard-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.wizard-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.wizard-field label {
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-md);
+  color: var(--ink);
+}
+
+.wizard-field input[type="text"] {
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  font-size: var(--fs-md);
+  color: var(--ink);
+  box-sizing: border-box;
+}
+
+.wizard-field input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-surface);
+}
+
+.wizard-options-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.wizard-pill {
+  padding: var(--sp-2) var(--sp-4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-full);
+  background: var(--surface-2);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.wizard-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--surface);
+}
+
+.wizard-pill.is-selected {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+  font-weight: var(--fw-bold);
+}
+
+/* ------------------------------------------------------------------
+   Wizard Footer & Navigation
+   ------------------------------------------------------------------ */
+.wizard__ftr {
+  padding: var(--sp-4) var(--sp-6);
+  border-top: 1px solid var(--line);
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wizard-loading {
+  text-align: center;
+  padding: var(--sp-8) var(--sp-4);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.wizard-loading__spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid var(--line-strong);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto var(--sp-4);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 640px) {
+  .wizard-modal { max-height: 95vh; margin: var(--sp-2); }
+  .wizard__hdr, .wizard__ftr { padding: var(--sp-4); }
+  .wizard__body { padding: var(--sp-4); }
+  .wizard__steps { display: none; }
+}

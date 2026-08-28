@@ -1,0 +1,259 @@
+/* ============================================================================
+   SKILLBOOK — page.css
+   The shell the book sits in: the desk, the sheet and its spine, the thumb
+   index rail, page-turn controls and the folio.
+
+   Typography *inside* the sheet lives in book.css — this file is furniture.
+
+     1. Stage
+     2. The sheet (spine, gutter, page edges)
+     3. Running head + folio
+     4. Thumb index rail
+     5. Page turn
+     6. Toast
+     7. Responsive
+   ============================================================================ */
+
+
+/* ============================================================================
+   1. STAGE
+   ============================================================================ */
+.stage{
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding: var(--sp-7) var(--gutter) var(--sp-13);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--rail-w);
+  align-items: start;
+}
+
+
+/* ============================================================================
+   2. THE SHEET
+   Square-ish on the spine side, rounded on the fore-edge — the way a bound
+   page actually sits. The gradient on the left is the gutter shadow.
+   ============================================================================ */
+.sheet{
+  position: relative;
+  max-width: var(--sheet-max);
+  margin-inline: auto;
+  padding: var(--sp-10) var(--sp-11) var(--sp-6) var(--sp-12);
+  background: var(--sheet);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xs) var(--r-lg) var(--r-lg) var(--r-xs);
+  box-shadow: var(--shadow-sheet);
+}
+
+/* gutter shadow, falling away from the spine */
+.sheet::before{
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 26px;
+  border-radius: var(--r-xs) 0 0 var(--r-xs);
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--ink) 7%, transparent) 0%,
+    color-mix(in srgb, var(--ink) 2.5%, transparent) 45%,
+    transparent 100%);
+  pointer-events: none;
+}
+
+/* the margin rule a bound page carries */
+.sheet::after{
+  content: "";
+  position: absolute;
+  left: 26px;
+  inset-block: var(--sp-6);
+  width: 1px;
+  background: var(--line-soft);
+  pointer-events: none;
+}
+
+/* pages stacked underneath, peeking out at the fore-edge */
+.sheet__edge{
+  position: absolute;
+  right: -5px;
+  inset-block: 12px;
+  width: 5px;
+  border-radius: 0 6px 6px 0;
+  border: 1px solid var(--line);
+  border-left: none;
+  background: var(--sheet);
+  pointer-events: none;
+}
+.sheet__edge::after{
+  content: "";
+  position: absolute;
+  right: -4px;
+  inset-block: 6px;
+  width: 4px;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid var(--line);
+  border-left: none;
+  background: var(--sheet);
+  opacity: .7;
+}
+
+
+/* ============================================================================
+   3. RUNNING HEAD + FOLIO
+   ============================================================================ */
+.running-head{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding-bottom: var(--sp-5);
+  margin-bottom: var(--sp-7);
+  border-bottom: 1px solid var(--line-soft);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-semi);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.running-head__part{ color: var(--clay); }
+
+.folio{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-9);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--font-serif);
+  font-size: var(--fs-base);
+  color: var(--ink-3);
+}
+.folio__dot{
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+
+
+/* ============================================================================
+   4. THUMB INDEX RAIL
+   The tabs cut into the edge of a dictionary.
+   ============================================================================ */
+.rail{
+  position: sticky;
+  top: 150px;
+  z-index: var(--z-rail);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: var(--sp-1);
+}
+
+.rail__tab{
+  width: 32px;
+  padding-block: 9px;
+  border: 1px solid var(--line);
+  border-left: none;
+  border-radius: 0 7px 7px 0;
+  background: var(--surface-2);
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-semi);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: .06em;
+  transition: all var(--dur) var(--ease);
+}
+.rail__tab:hover{
+  width: 38px;
+  background: var(--surface-3);
+  color: var(--ink);
+}
+.rail__tab.is-done{
+  color: var(--ok);
+  border-color: color-mix(in srgb, var(--ok) 30%, var(--line));
+}
+.rail__tab[aria-current="page"]{
+  width: 40px;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-contrast);
+  box-shadow: var(--shadow-1);
+}
+
+
+/* ============================================================================
+   5. PAGE TURN
+   ============================================================================ */
+.turn{
+  position: fixed;
+  top: 50%;
+  z-index: var(--z-turn);
+  translate: 0 -50%;
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--sheet);
+  color: var(--ink-2);
+  box-shadow: var(--shadow-2);
+  transition: color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              scale var(--dur) var(--ease);
+}
+.turn:hover{ color: var(--accent); border-color: var(--accent); scale: 1.06; }
+.turn:disabled{ opacity: .3; pointer-events: none; }
+
+.turn--prev{ left: max(18px, calc(50% - 560px)); }
+.turn--next{ right: max(72px, calc(50% - 560px)); }
+
+
+/* ============================================================================
+   6. TOAST
+   ============================================================================ */
+.toast{
+  position: fixed;
+  left: 50%;
+  bottom: var(--sp-7);
+  z-index: var(--z-toast);
+  translate: -50% 16px;
+  padding: 11px 20px;
+  border-radius: var(--r-md);
+  background: var(--ink);
+  color: var(--ink-invert);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
+  box-shadow: var(--shadow-3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease), translate var(--dur) var(--ease);
+}
+.toast.is-on{ opacity: 1; translate: -50% 0; }
+
+
+/* ============================================================================
+   7. RESPONSIVE
+   ============================================================================ */
+@media (max-width: 1180px){
+  .turn--next{ right: 18px; }
+}
+
+@media (max-width: 900px){
+  .stage{ grid-template-columns: minmax(0, 1fr); padding-top: var(--sp-5); }
+  .rail{ display: none; }
+  .turn{ display: none; }
+
+  .sheet{
+    padding: var(--sp-8) var(--sp-6) var(--sp-5) var(--sp-8);
+    border-radius: var(--r-xs) var(--r-md) var(--r-md) var(--r-xs);
+  }
+  .sheet::before{ width: 14px; }
+  .sheet::after{ left: 14px; }
+  .sheet__edge{ display: none; }
+}
+
+@media (max-width: 600px){
+  .stage{ padding-inline: var(--gutter-sm); }
+  .sheet{ padding: var(--sp-7) var(--sp-5) var(--sp-4) var(--sp-6); }
+  .running-head__part{ display: none; }
+}

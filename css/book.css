@@ -1,0 +1,405 @@
+/* ============================================================================
+   SKILLBOOK — book.css
+   Typography inside the sheet. This is the part a reader actually spends time
+   with, so it follows print conventions rather than web ones: justified
+   measure, a drop cap, small-caps openers, real worked-example blocks.
+
+     1. Reading size (user control)
+     2. Chapter opener
+     3. Body
+     4. Callout, example, pull quote, margin note
+     5. Figure + code
+     6. Exercises
+     7. Chapter test call-to-action
+   ============================================================================ */
+
+
+/* ============================================================================
+   1. READING SIZE
+   Driven by [data-text] on <html>, set from the "Text Size" button.
+   ============================================================================ */
+:root{ --fs-book: 17px; }
+[data-text="sm"]{ --fs-book: 15.5px; }
+[data-text="md"]{ --fs-book: 17px; }
+[data-text="lg"]{ --fs-book: 19px; }
+
+.book{
+  font-family: var(--font-serif);
+  font-size: var(--fs-book);
+  line-height: var(--lh-book);
+  color: var(--ink-2);
+  transition: font-size var(--dur) var(--ease);
+}
+
+
+/* ============================================================================
+   2. CHAPTER OPENER
+   ============================================================================ */
+.chapter__no{
+  font-family: var(--font-sans);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-semi);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--clay);
+  text-align: center;
+}
+
+.chapter__title{
+  margin-top: var(--sp-3);
+  font-family: var(--font-serif);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-chapter);
+  letter-spacing: var(--ls-tighter);
+  line-height: var(--lh-tight);
+  text-align: center;
+  color: var(--ink);
+}
+
+/* the ornament rule under a chapter title */
+.ornament{
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  max-width: 200px;
+  margin: var(--sp-5) auto var(--sp-8);
+  color: var(--line-strong);
+}
+.ornament::before,
+.ornament::after{
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+}
+.ornament span{ font-size: var(--fs-xs); color: var(--clay); }
+
+
+/* ============================================================================
+   3. BODY
+   ============================================================================ */
+.book p{
+  margin-bottom: var(--sp-4);
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* The opening paragraph of a chapter: drop cap plus a small-caps first line. */
+.book p.is-opening::first-letter{
+  float: left;
+  padding: 8px 12px 0 0;
+  font-size: 3.4em;
+  line-height: .82;
+  color: var(--clay);
+}
+.book p.is-opening::first-line{
+  font-variant: small-caps;
+  letter-spacing: .03em;
+}
+
+.book h3{
+  margin: var(--sp-8) 0 var(--sp-3);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.book h4{
+  margin: var(--sp-6) 0 var(--sp-2);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semi);
+  color: var(--ink);
+}
+
+.book ul,
+.book ol{
+  margin: 0 0 var(--sp-4);
+  padding-left: var(--sp-6);
+}
+.book li{ margin-bottom: var(--sp-2); }
+.book li::marker{ color: var(--clay); }
+
+
+/* ============================================================================
+   4. CALLOUT / EXAMPLE / PULL QUOTE / MARGIN NOTE
+   ============================================================================ */
+.callout{
+  margin: var(--sp-6) 0;
+  padding: var(--sp-5);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-sm);
+  background: var(--accent-surface);
+  font-size: calc(var(--fs-book) - 1px);
+}
+.callout__label{
+  display: block;
+  margin-bottom: var(--sp-2);
+  font-family: var(--font-sans);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+.callout--clay{ border-left-color: var(--clay); background: var(--clay-surface); }
+.callout--clay .callout__label{ color: var(--clay); }
+
+.example{
+  margin: var(--sp-7) 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.example__head{
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 10px var(--sp-5);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-3);
+  font-family: var(--font-sans);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.example__head::before{
+  content: "";
+  width: 6px; height: 6px;
+  flex: none;
+  border-radius: 1.5px;
+  background: var(--clay);
+}
+.example__body{ padding: var(--sp-5); font-size: calc(var(--fs-book) - 1.5px); }
+.example__body > p:last-child{ margin-bottom: 0; }
+
+.pullquote{
+  position: relative;
+  margin: var(--sp-8) 0;
+  padding-inline: var(--sp-8);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: calc(var(--fs-book) + 3px);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--ink);
+}
+.pullquote::before,
+.pullquote::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+  width: 44px; height: 1px;
+  background: var(--line-strong);
+}
+.pullquote::before{ top: calc(var(--sp-4) * -1); }
+.pullquote::after{ bottom: calc(var(--sp-4) * -1); }
+
+/* A note in the outer margin, exactly where a textbook puts one. */
+.has-note{ position: relative; }
+.margin-note{
+  position: absolute;
+  left: calc(100% + var(--sp-6));
+  top: 0;
+  width: 150px;
+  padding-left: var(--sp-3);
+  border-left: 2px solid var(--clay);
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+.margin-note b{
+  display: block;
+  margin-bottom: 3px;
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--clay);
+}
+
+
+/* ============================================================================
+   5. FIGURE + CODE
+   ============================================================================ */
+.figure{
+  margin: var(--sp-7) 0;
+  padding: var(--sp-6);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  color: var(--ink-3);
+}
+.figure svg{ margin: 0 auto var(--sp-3); color: var(--ink-3); opacity: .8; }
+
+pre.code{
+  margin: 0;
+  padding: var(--sp-5);
+  overflow-x: auto;
+  background: #15151A;
+  color: #E6E3DC;
+  font-family: var(--font-mono);
+  font-size: 12.8px;
+  line-height: 1.65;
+}
+pre.code .k{ color: #C792EA; }
+pre.code .s{ color: #C3E88D; }
+pre.code .c{ color: #6E7481; font-style: italic; }
+pre.code .f{ color: #82AAFF; }
+pre.code .n{ color: #F78C6C; }
+
+
+/* ============================================================================
+   6. EXERCISES
+   ============================================================================ */
+.exercises{
+  margin-top: var(--sp-10);
+  padding-top: var(--sp-7);
+  border-top: 2px solid var(--line);
+}
+.exercises__head{
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-2);
+}
+.exercises__head h3{
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-2xl);
+  letter-spacing: var(--ls-tighter);
+  text-transform: none;
+  color: var(--ink);
+}
+.exercises__tag{
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  background: var(--clay-surface);
+  color: var(--clay);
+  font-family: var(--font-sans);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+}
+.exercises__note{
+  margin-bottom: var(--sp-5);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  color: var(--ink-3);
+}
+
+.exercise{
+  display: flex;
+  gap: var(--sp-3);
+  padding: var(--sp-4) 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.exercise:last-of-type{ border-bottom: none; }
+.exercise__no{
+  flex: none;
+  padding-top: 3px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semi);
+  color: var(--accent);
+}
+.exercise__body{ flex: 1; min-width: 0; }
+.exercise__body > p{ margin: 0; text-align: left; }
+
+.exercise__reveal{
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: var(--sp-2);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semi);
+  color: var(--accent);
+}
+.exercise__reveal:hover{ text-decoration: underline; }
+.exercise__reveal[aria-expanded="true"] svg{ rotate: 180deg; }
+
+.exercise__answer{
+  margin-top: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border-left: 3px solid var(--ok);
+  border-radius: var(--r-sm);
+  background: var(--ok-surface);
+  font-size: calc(var(--fs-book) - 1.5px);
+}
+.exercise__answer[hidden]{ display: none; }
+
+
+/* ============================================================================
+   7. CHAPTER TEST CTA
+   ============================================================================ */
+.test-cta{
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+  flex-wrap: wrap;
+  margin-top: var(--sp-8);
+  padding: var(--sp-6);
+  border-radius: var(--r-xl);
+  background: var(--ink);
+  color: var(--ink-invert);
+}
+[data-theme="dark"] .test-cta{
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+.test-cta h4{
+  margin: 0 0 3px;
+  font-family: var(--font-serif);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-xl);
+  color: inherit;
+}
+.test-cta p{
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  opacity: .72;
+  text-align: left;
+}
+.test-cta .btn{
+  margin-left: auto;
+  background: var(--sheet);
+  color: var(--ink);
+}
+[data-theme="dark"] .test-cta .btn{
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 1180px){
+  .margin-note{
+    position: static;
+    width: auto;
+    margin: var(--sp-3) 0 var(--sp-5);
+  }
+}
+
+@media (max-width: 600px){
+  .book p{ text-align: left; }
+  .pullquote{ padding-inline: 0; }
+  .test-cta .btn{ margin-left: 0; width: 100%; }
+}

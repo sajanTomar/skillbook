@@ -1,0 +1,328 @@
+/* ============================================================================
+   SKILLBOOK — header.css
+   Three header designs. All three live in the DOM; [data-header] on <html>
+   decides which one is shown, so switching is instant and costs no JS.
+
+     1. Shell + variant switching
+     2. Variant 1 — The Masthead        (two tiers)
+     3. Variant 2 — The Reading Desk    (one tall tier)
+     4. Variant 3 — The Library Counter (search-led, with a tab strip)
+     5. Responsive
+   ============================================================================ */
+
+
+/* ============================================================================
+   1. SHELL
+   ============================================================================ */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+}
+
+/* Only the selected variant renders. */
+.hdr{ display: none; }
+[data-header="1"] .hdr--1,
+[data-header="2"] .hdr--2,
+[data-header="3"] .hdr--3{ display: block; }
+
+/* Shared inner row. */
+.hdr__row{
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: 12px;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  box-sizing: border-box;
+}
+
+
+/* ============================================================================
+   2. VARIANT 1 — THE MASTHEAD
+   Identity and library actions above; the book you are in, below.
+   ============================================================================ */
+.hdr--1{
+  background: var(--sheet);
+  border-bottom: 1px solid var(--line);
+}
+
+.hdr1__top{
+  display: flex;
+  align-items: center;
+  min-height: 72px;
+}
+.hdr1__top .hdr__row{
+  width: 100%;
+  min-height: 72px;
+  padding-block: 14px;
+}
+
+.hdr1__motto{
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-left: var(--sp-5);
+  padding-left: var(--sp-5);
+  border-left: 1px solid var(--line);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--clay);
+}
+
+.hdr1__acts{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.hdr1__bot{
+  background: var(--surface-2);
+  border-top: 1px solid var(--line-soft);
+}
+.hdr1__bot .hdr__row{ min-height: 48px; padding-block: 8px; gap: var(--sp-4); }
+
+.hdr1__book{
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+.hdr1__title{
+  font-family: var(--font-serif);
+  font-size: var(--fs-md);
+  letter-spacing: var(--ls-tight);
+  color: var(--ink);
+  white-space: nowrap;
+}
+.hdr1__chapter{
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hdr1__meta{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.hdr1__meta .track{ width: 120px; }
+.hdr1__pct{
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semi);
+  color: var(--ink-2);
+}
+.hdr1__tools{ display: flex; align-items: center; gap: var(--sp-2); }
+
+
+/* ============================================================================
+   3. VARIANT 2 — THE READING DESK
+   Everything on one line: identity, what you're reading, tools, primary action.
+   ============================================================================ */
+.hdr--2{
+  background: var(--sheet);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow-1);
+}
+.hdr--2 .hdr__row{ min-height: 76px; padding-block: 14px; }
+
+.hdr2__now{
+  margin-left: var(--sp-5);
+  padding-left: var(--sp-5);
+  border-left: 1px solid var(--line);
+  min-width: 0;
+}
+.hdr2__label{
+  font-size: 9.5px;
+  font-weight: var(--fw-bold);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+.hdr2__value{
+  margin-top: 2px;
+  font-family: var(--font-serif);
+  font-size: var(--fs-lg);
+  letter-spacing: var(--ls-tight);
+  line-height: 1.25;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hdr2__value small{
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+
+.hdr2__acts{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.hdr2__sep{
+  width: 1px;
+  height: 26px;
+  background: var(--line);
+  margin-inline: var(--sp-1);
+}
+
+
+/* ============================================================================
+   4. VARIANT 3 — THE LIBRARY COUNTER
+   The product's core action — "what do you want to learn" — is the header.
+   ============================================================================ */
+.hdr--3{
+  background: var(--sheet);
+  border-bottom: 1px solid var(--line);
+}
+.hdr3__top{
+  display: flex;
+  align-items: center;
+  min-height: 74px;
+}
+.hdr3__top .hdr__row{
+  width: 100%;
+  min-height: 74px;
+  padding-block: 14px;
+}
+
+.hdr3__top .search{
+  flex: 1;
+  max-width: 440px;
+  margin-left: var(--sp-2);
+}
+
+.hdr3__acts{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.hdr3__bot{
+  background: var(--surface-2);
+  border-top: 1px solid var(--line-soft);
+}
+.hdr3__bot .hdr__row{ min-height: 46px; gap: 0; }
+
+.hdr3__tabs{
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.hdr3__tabs::-webkit-scrollbar{ display: none; }
+
+.hdr3__tab{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 12px 18px;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--ink-3);
+  white-space: nowrap;
+  transition: color var(--dur) var(--ease);
+}
+.hdr3__tab:hover{ color: var(--ink); }
+.hdr3__tab[aria-current="step"]{ color: var(--accent-strong); font-weight: var(--fw-semi); }
+.hdr3__tab[aria-current="step"]::after{
+  content: "";
+  position: absolute;
+  left: 12px; right: 12px; bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.hdr3__num{
+  width: 19px; height: 19px;
+  flex: none;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--line);
+  color: var(--sheet);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+}
+.hdr3__tab.is-done .hdr3__num{ background: var(--ok); color: #fff; }
+.hdr3__tab[aria-current="step"] .hdr3__num{ background: var(--accent); color: var(--accent-contrast); }
+
+.hdr3__right{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding-left: var(--sp-4);
+}
+
+
+/* ============================================================================
+   5. RESPONSIVE
+   Each variant collapses differently — the search field, the "now reading"
+   block and the tab strip each need their own answer.
+   ============================================================================ */
+
+/* — tablet — */
+@media (max-width: 1080px){
+  .hdr1__motto{ display: none; }
+  .hdr3__top .search{ max-width: none; }
+}
+
+@media (max-width: 900px){
+  /* Action labels drop away; icons and aria-labels carry the meaning. */
+  .btn__label{ display: none; }
+  .btn{ padding-inline: var(--sp-3); }
+  .btn--sm{ padding-inline: 10px; }
+
+  /* ...except the one primary action, which keeps its word. */
+  .btn--fill .btn__label,
+  .btn--ink .btn__label{ display: inline; }
+
+  .hdr2__now{ display: none; }
+  .hdr1__title{ display: none; }
+  .hdr--2 .hdr__row{ min-height: 64px; }
+}
+
+/* — phone — */
+@media (max-width: 720px){
+  .hdr__row{ padding-inline: var(--gutter-sm); gap: var(--sp-3); }
+
+  .wordmark__tag{ display: none; }
+  .wordmark__mark{ width: 32px; height: 32px; font-size: var(--fs-md); }
+  .wordmark__name{ font-size: var(--fs-lg); }
+
+  .hdr1__meta .track{ width: 64px; }
+  .hdr1__tools .btn--line{ display: none; }
+
+  .hdr3__right{ display: none; }
+  .hdr3__bot .hdr__row{ padding-right: 0; }
+  .hdr3__tab{ padding-inline: 14px; }
+
+  /* On a phone the search field owns its own row rather than being squeezed. */
+  .hdr3__top .hdr__row{ flex-wrap: wrap; padding-bottom: var(--sp-3); }
+  .hdr3__top .search{ order: 3; flex-basis: 100%; margin-left: 0; }
+  .hdr3__acts{ order: 2; }
+}
+
+@media (max-width: 480px){
+  .hdr1__chapter{ display: none; }
+  .btn--fill .btn__label,
+  .btn--ink .btn__label{ display: none; }
+}

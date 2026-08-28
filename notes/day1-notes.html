@@ -1,0 +1,1494 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Skillbook — Day 1 Class Notes &amp; Interview Prep</title>
+<style>
+/* ============================================================
+   NOTEBOOK PAPER
+   ============================================================ */
+@page { size: A4; margin: 13mm 12mm 14mm 12mm; }
+
+:root{
+  --paper:#FFFDF7;
+  --rule:#DCE6F2;
+  --margin-rule:#E9A8A0;
+  --ink:#1F2430;
+  --ink-2:#41485A;
+  --pencil:#6B7385;
+  --blue:#1B4D8F;
+  --red:#B3352C;
+  --green:#1F6B4A;
+  --amber:#F4E9A8;
+  --amber-2:#FDF3C4;
+  --mint:#DDF0E5;
+  --code-bg:#F2F4F8;
+  --hand: "Bradley Hand", "Segoe Print", "Comic Sans MS", cursive;
+  --body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "SF Mono", Menlo, Consolas, monospace;
+}
+
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:10.4pt;
+  line-height:1.62;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+/* ruled paper + left margin line */
+.page{
+  position:relative;
+  padding:6mm 4mm 6mm 15mm;
+  background-image:
+    linear-gradient(to right, transparent 13mm, var(--margin-rule) 13mm, var(--margin-rule) 13.4mm, transparent 13.4mm),
+    repeating-linear-gradient(to bottom, transparent 0, transparent 7.4mm, var(--rule) 7.4mm, var(--rule) 7.5mm);
+  background-attachment:local;
+}
+.page + .page{ break-before:page; }
+
+/* ============================================================
+   HEADINGS
+   ============================================================ */
+h1,h2,h3,h4{ margin:0; font-weight:700; }
+
+h1.cover-title{
+  font-family:var(--hand);
+  font-size:34pt;
+  line-height:1.1;
+  color:var(--blue);
+}
+h2{
+  font-family:var(--hand);
+  font-size:19pt;
+  color:var(--blue);
+  margin:9mm 0 3mm;
+  padding-bottom:1.5mm;
+  border-bottom:2px solid var(--blue);
+  break-after:avoid;
+}
+h2:first-child{ margin-top:2mm; }
+h3{
+  font-family:var(--hand);
+  font-size:14pt;
+  color:var(--red);
+  margin:6mm 0 1.5mm;
+  break-after:avoid;
+}
+h4{
+  font-size:10.6pt;
+  color:var(--ink);
+  margin:3.5mm 0 1mm;
+  break-after:avoid;
+}
+
+p{ margin:0 0 2.2mm; }
+ul,ol{ margin:0 0 2.5mm; padding-left:6mm; }
+li{ margin-bottom:1mm; }
+li::marker{ color:var(--red); }
+
+/* ============================================================
+   INK MARKS
+   ============================================================ */
+.hl{ background:linear-gradient(transparent 55%, var(--amber) 55%); padding:0 1px; }
+.hl-g{ background:linear-gradient(transparent 55%, var(--mint) 55%); padding:0 1px; }
+b,strong{ color:var(--ink); }
+.term{ font-weight:700; color:var(--blue); }
+.warn{ color:var(--red); font-weight:600; }
+
+code{
+  font-family:var(--mono);
+  font-size:8.9pt;
+  background:var(--code-bg);
+  padding:0.5mm 1.2mm;
+  border-radius:2px;
+  color:var(--ink);
+}
+pre{
+  font-family:var(--mono);
+  font-size:8.4pt;
+  line-height:1.5;
+  background:var(--code-bg);
+  border-left:3px solid var(--blue);
+  border-radius:3px;
+  padding:2.5mm 3mm;
+  margin:2mm 0 3mm;
+  overflow:visible;
+  white-space:pre-wrap;
+  word-break:break-word;
+  break-inside:avoid;
+}
+pre code{ background:none; padding:0; font-size:inherit; }
+.cm{ color:var(--pencil); font-style:italic; }
+.out{ color:var(--green); font-weight:600; }
+
+/* boxes */
+.box{
+  border:1.5px solid var(--blue);
+  border-radius:4px;
+  padding:2.5mm 3mm;
+  margin:3mm 0;
+  background:#F4F8FD;
+  break-inside:avoid;
+}
+.box.remember{ border-color:var(--red); background:#FDF3F2; }
+.box.trick{ border-color:#C99A2E; background:var(--amber-2); }
+.box .lbl{
+  font-family:var(--hand);
+  font-size:11.5pt;
+  color:var(--blue);
+  display:block;
+  margin-bottom:1mm;
+}
+.box.remember .lbl{ color:var(--red); }
+.box.trick .lbl{ color:#8A6415; }
+
+.note-margin{
+  font-family:var(--hand);
+  font-size:10.5pt;
+  color:var(--red);
+  margin:1.5mm 0 2.5mm;
+  padding-left:3mm;
+  border-left:2px solid var(--margin-rule);
+}
+
+/* Q&A */
+.qa{ margin:0 0 3.5mm; break-inside:avoid; }
+.qa .q{
+  font-weight:700;
+  color:var(--ink);
+  margin-bottom:1mm;
+}
+.qa .q::before{
+  content:"Q" attr(data-n) ".";
+  color:var(--red);
+  font-family:var(--mono);
+  font-weight:700;
+  margin-right:1.6mm;
+}
+.qa .a{ padding-left:6mm; border-left:2px solid var(--rule); }
+.qa .a::before{
+  content:"A.";
+  font-family:var(--mono);
+  color:var(--green);
+  font-weight:700;
+  margin-right:1.6mm;
+  margin-left:-5.5mm;
+}
+.lvl{
+  display:inline-block;
+  font-size:7pt;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:0.3mm 1.6mm;
+  border-radius:2px;
+  vertical-align:1.2mm;
+  margin-left:1.5mm;
+}
+.lvl.b{ background:var(--mint); color:var(--green); }
+.lvl.m{ background:var(--amber-2); color:#8A6415; }
+.lvl.h{ background:#FBE3E1; color:var(--red); }
+
+/* tables */
+table{ width:100%; border-collapse:collapse; margin:2mm 0 3mm; font-size:9.4pt; break-inside:avoid; }
+th,td{ border:1px solid var(--rule); padding:1.6mm 2mm; text-align:left; vertical-align:top; }
+th{ background:#EDF2F9; font-weight:700; color:var(--blue); }
+
+/* cover */
+.cover{ padding:22mm 12mm; text-align:left; }
+.cover .sub{ font-family:var(--hand); font-size:15pt; color:var(--red); margin-top:4mm; }
+.cover .meta{ margin-top:14mm; font-size:10pt; color:var(--ink-2); line-height:2; }
+.cover .meta b{ color:var(--blue); }
+.cover .rule{ height:3px; background:var(--blue); margin:6mm 0; width:60mm; }
+
+.toc{ font-size:10pt; }
+.toc div{ display:flex; gap:3mm; padding:1.2mm 0; border-bottom:1px dotted var(--rule); }
+.toc div b{ color:var(--blue); width:16mm; flex:none; font-family:var(--mono); font-size:9pt; }
+
+.tag-row{ margin:2mm 0 4mm; }
+.tag{
+  display:inline-block;
+  font-size:8.4pt;
+  padding:0.8mm 2mm;
+  margin:0 1.2mm 1.4mm 0;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  background:#fff;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     COVER
+     ============================================================ -->
+<div class="page cover">
+  <h1 class="cover-title">Frontend Class Notes<br>&amp; Interview Prep</h1>
+  <div class="rule"></div>
+  <p class="sub">Everything used in Day 1 of the Skillbook project</p>
+
+  <div class="meta">
+    <b>Project</b> — Skillbook (AI textbook generator)<br>
+    <b>Built with</b> — HTML5, CSS3 (no framework), Vanilla JavaScript<br>
+    <b>Level</b> — 3 years frontend experience, preparing for interviews<br>
+    <b>Covers</b> — 50 concepts · 70 interview questions · 15 coding &amp; output problems
+  </div>
+
+  <div class="box" style="margin-top:16mm">
+    <span class="lbl">How to use these notes</span>
+    Read Parts A–C once to refresh the concept, then go straight to Parts D–F.
+    Every answer here is written the way you would <span class="hl">say it out loud in a room</span> —
+    short, specific, and ending before you start rambling. Code answers are written the way you
+    would type them on a whiteboard or shared editor.
+  </div>
+</div>
+
+
+<!-- ============================================================
+     CONTENTS
+     ============================================================ -->
+<div class="page">
+  <h2>Contents</h2>
+  <div class="toc">
+    <div><b>Part A</b><span>HTML — 10 concepts</span></div>
+    <div><b>Part B</b><span>CSS — 18 concepts</span></div>
+    <div><b>Part C</b><span>JavaScript — 20 concepts</span></div>
+    <div><b>Part D</b><span>Interview Questions — HTML (14)</span></div>
+    <div><b>Part E</b><span>Interview Questions — CSS (24)</span></div>
+    <div><b>Part F</b><span>Interview Questions — JavaScript (32)</span></div>
+    <div><b>Part G</b><span>Coding &amp; Output Questions (15)</span></div>
+    <div><b>Part H</b><span>Last-Minute Revision Sheet</span></div>
+  </div>
+
+  <h3>What was actually built on Day 1</h3>
+  <p>A landing page and a book-reading page for an AI learning app. No framework, no build step —
+    plain HTML, CSS and JS. That constraint is <span class="hl">why this project maps so well onto
+    interview questions</span>: everything a library would normally hide had to be written by hand.</p>
+
+  <div class="tag-row">
+    <span class="tag">Design tokens (CSS variables)</span>
+    <span class="tag">Dark mode + theme switching</span>
+    <span class="tag">localStorage persistence</span>
+    <span class="tag">Event delegation</span>
+    <span class="tag">IntersectionObserver</span>
+    <span class="tag">Module pattern / IIFE</span>
+    <span class="tag">Flexbox + Grid layouts</span>
+    <span class="tag">Sticky header</span>
+    <span class="tag">ARIA + keyboard access</span>
+    <span class="tag">SVG icon system</span>
+    <span class="tag">FOUC prevention</span>
+    <span class="tag">Responsive breakpoints</span>
+    <span class="tag">CSS animations</span>
+    <span class="tag">Print stylesheet</span>
+    <span class="tag">prefers-reduced-motion</span>
+  </div>
+
+  <div class="box remember">
+    <span class="lbl">Interview reality check</span>
+    Interviewers rarely ask "what is flexbox". They ask <span class="hl">"you built X — why did you
+    do it that way?"</span> Every concept below is written with that follow-up in mind.
+  </div>
+</div>
+
+
+<!-- ============================================================
+     PART A — HTML
+     ============================================================ -->
+<div class="page">
+  <h2>Part A — HTML Concepts</h2>
+
+  <h3>A1. Semantic HTML</h3>
+  <p>Using the tag that <span class="term">describes the meaning</span> of the content, not just a
+    <code>div</code>. In the project: <code>&lt;header&gt;</code> for the site header,
+    <code>&lt;main&gt;</code> for the chapter, <code>&lt;article&gt;</code> for the book page,
+    <code>&lt;aside&gt;</code> for the margin note, <code>&lt;nav&gt;</code> for the chapter rail.</p>
+  <p><b>Why it matters:</b> screen readers build a landmark map from these, search engines weight
+    them, and other developers read your HTML like a document instead of a puzzle.</p>
+  <pre><code>&lt;header&gt;   site or section header
+&lt;nav&gt;      a block of navigation links
+&lt;main&gt;     the ONE main content area (only one per page)
+&lt;article&gt;  self-contained, makes sense on its own
+&lt;section&gt;  a thematic group, <span class="cm">usually needs a heading</span>
+&lt;aside&gt;    tangential content (margin notes, sidebars)
+&lt;footer&gt;   footer of page or section</code></pre>
+  <div class="note-margin">div is not banned — use it when there is genuinely no meaning, only layout.</div>
+
+  <h3>A2. The viewport meta tag</h3>
+  <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></pre>
+  <p>Without it, mobile browsers render at ~980px wide and shrink the result, so your media queries
+    <span class="warn">never fire</span>. <code>width=device-width</code> says "use the real device
+    width". <code>initial-scale=1</code> sets the starting zoom.</p>
+
+  <h3>A3. data-* attributes and <code>dataset</code></h3>
+  <p>A standards-safe place to attach your own data to an element.</p>
+  <pre><code>&lt;button data-chapter="3" data-ico="check"&gt;&lt;/button&gt;
+
+el.dataset.chapter      <span class="cm">// "3"  — always a string</span>
+el.dataset.ico          <span class="cm">// "check"</span>
+Number(el.dataset.chapter)  <span class="cm">// 3</span></code></pre>
+  <p>Kebab-case in HTML becomes camelCase in JS: <code>data-user-id</code> → <code>dataset.userId</code>.</p>
+  <div class="box trick">
+    <span class="lbl">Used in the project</span>
+    <code>data-theme</code>, <code>data-header</code> and <code>data-desk</code> sit on
+    <code>&lt;html&gt;</code>. CSS then styles off them — <span class="hl">changing one attribute
+    reskins the entire site</span> with zero JavaScript styling.
+  </div>
+
+  <h3>A4. ARIA — the six you actually need</h3>
+  <table>
+    <tr><th>Attribute</th><th>Use it for</th></tr>
+    <tr><td><code>aria-label</code></td><td>Name an element with no visible text (icon buttons)</td></tr>
+    <tr><td><code>aria-expanded</code></td><td>Accordions, dropdowns — true / false</td></tr>
+    <tr><td><code>aria-pressed</code></td><td>Toggle buttons that stay on</td></tr>
+    <tr><td><code>aria-current</code></td><td>Current page / step in a set ("page", "step")</td></tr>
+    <tr><td><code>aria-hidden</code></td><td>Hide decoration from screen readers</td></tr>
+    <tr><td><code>aria-live</code></td><td>Announce dynamic updates (toasts)</td></tr>
+  </table>
+  <div class="box remember">
+    <span class="lbl">Rule zero of ARIA</span>
+    <span class="hl">No ARIA is better than bad ARIA.</span> A native <code>&lt;button&gt;</code> beats
+    <code>&lt;div role="button" tabindex="0"&gt;</code> every time — you get focus, Enter, Space and
+    disabled behaviour free.
+  </div>
+
+  <h3>A5. Focus management &amp; skip links</h3>
+  <p>Keyboard users tab through in DOM order. A <span class="term">skip link</span> is the first
+    focusable element, hidden until focused, letting someone jump past the nav.</p>
+  <pre><code>.skip-link{ position:absolute; transform:translateY(-200%); }
+.skip-link:focus-visible{ transform:none; }   <span class="cm">/* appears on Tab */</span></code></pre>
+
+  <h3>A6. Buttons, labels and forms</h3>
+  <p>Always set <code>type</code> on a button. Inside a <code>&lt;form&gt;</code> the default is
+    <code>submit</code>, which will reload your page unexpectedly.</p>
+  <pre><code>&lt;button type="button"&gt;  <span class="cm">// does nothing by itself — for JS</span>
+&lt;button type="submit"&gt;  <span class="cm">// submits the form (default!)</span>
+
+&lt;label&gt;                 <span class="cm">// wrapping = no id needed</span>
+  &lt;input type="search"&gt;
+&lt;/label&gt;</code></pre>
+
+  <h3>A7. <code>hidden</code> vs <code>display:none</code> vs <code>visibility</code></h3>
+  <table>
+    <tr><th>Method</th><th>In layout?</th><th>Screen reader?</th></tr>
+    <tr><td><code>hidden</code> attribute</td><td>No</td><td>No</td></tr>
+    <tr><td><code>display:none</code></td><td>No</td><td>No</td></tr>
+    <tr><td><code>visibility:hidden</code></td><td><b>Yes</b> (space kept)</td><td>No</td></tr>
+    <tr><td><code>opacity:0</code></td><td><b>Yes</b></td><td><b>Yes</b> — still read &amp; clickable</td></tr>
+    <tr><td><code>.sr-only</code></td><td>No (1px clip)</td><td><b>Yes</b> — intentionally</td></tr>
+  </table>
+  <div class="note-margin">Gotcha: <code>hidden</code> is beaten by any <code>display</code> rule. Add <code>[hidden]{display:none!important}</code>.</div>
+
+  <h3>A8. Inline SVG and <code>currentColor</code></h3>
+  <pre><code>&lt;svg viewBox="0 0 24 24" fill="none" stroke="currentColor"&gt;
+  &lt;path d="M4 12h15"/&gt;
+&lt;/svg&gt;</code></pre>
+  <p><code>currentColor</code> = "whatever <code>color</code> is on my parent". So one icon file works
+    on light, dark and hover states with <span class="hl">no extra CSS</span>.
+    <code>viewBox</code> defines the internal coordinate system, letting the icon scale to any size.</p>
+
+  <h3>A9. Script loading &amp; FOUC</h3>
+  <table>
+    <tr><th></th><th>Downloads</th><th>Executes</th></tr>
+    <tr><td>plain <code>&lt;script&gt;</code></td><td>blocks parsing</td><td>immediately</td></tr>
+    <tr><td><code>async</code></td><td>parallel</td><td>as soon as ready — <b>order not guaranteed</b></td></tr>
+    <tr><td><code>defer</code></td><td>parallel</td><td>after HTML parsed, <b>in order</b></td></tr>
+  </table>
+  <p><span class="term">FOUC / theme flash</span> — if you apply a saved dark theme after the page
+    paints, the user sees a white flash. Fix: one small <b>blocking</b> inline script in
+    <code>&lt;head&gt;</code>, before the CSS renders.</p>
+  <pre><code>&lt;script&gt;
+  var s = JSON.parse(localStorage.getItem('settings') || '{}');
+  document.documentElement.dataset.theme = s.theme || 'light';
+&lt;/script&gt;</code></pre>
+
+  <h3>A10. Useful "forgotten" elements</h3>
+  <p><code>&lt;kbd&gt;</code> keyboard key · <code>&lt;output&gt;</code> result of a calculation ·
+    <code>&lt;pre&gt;</code> preserves whitespace · <code>&lt;code&gt;</code> inline code ·
+    <code>&lt;blockquote&gt;</code> quotation · <code>&lt;time datetime=""&gt;</code> machine-readable date ·
+    <code>&lt;details&gt;/&lt;summary&gt;</code> native accordion, no JS.</p>
+</div>
+
+
+<!-- ============================================================
+     PART B — CSS
+     ============================================================ -->
+<div class="page">
+  <h2>Part B — CSS Concepts</h2>
+
+  <h3>B1. Custom properties (CSS variables)</h3>
+  <pre><code>:root{ --accent:#2A4C7D; }          <span class="cm">/* global */</span>
+.btn{ background:var(--accent); }
+.btn{ background:var(--brand, #333); } <span class="cm">/* fallback */</span></code></pre>
+  <p>They <span class="hl">inherit and cascade</span> — unlike Sass variables which are compiled away.
+    That means you can override one on a child and everything inside it changes. This is what makes
+    theming possible without JS.</p>
+
+  <h3>B2. Theming with attribute selectors</h3>
+  <pre><code>:root            { --ink:#191814; --bg:#fff;   }
+[data-theme=dark]{ --ink:#EDEAE3; --bg:#0E0E0D; }
+
+body{ background:var(--bg); color:var(--ink); }</code></pre>
+  <p>Flip <code>document.documentElement.dataset.theme</code> and the entire page re-themes.
+    <span class="hl">The JS never touches a single style</span> — it only sets one attribute.</p>
+
+  <h3>B3. Cascade, specificity, inheritance</h3>
+  <p>When two rules collide, the winner is decided in this order:</p>
+  <ol>
+    <li><code>!important</code> (avoid)</li>
+    <li><span class="term">Specificity</span> — inline <b>1000</b>, id <b>100</b>, class/attribute/pseudo-class <b>10</b>, element/pseudo-element <b>1</b></li>
+    <li><span class="term">Source order</span> — last one wins</li>
+  </ol>
+  <pre><code>#nav .item      → 0,1,1,0  = 110  <span class="cm">wins</span>
+.nav .item.big  → 0,0,3,0  = 30</code></pre>
+  <div class="box trick">
+    <span class="lbl">Trap</span>
+    Specificity <span class="hl">never carries across levels</span> — 11 classes (110) still lose to
+    one id (100)? <span class="warn">No.</span> Compare column by column: id column 0 vs 1 → the id wins.
+    That is why "just add another class" sometimes doesn't work.
+  </div>
+
+  <h3>B4. Box model &amp; <code>box-sizing</code></h3>
+  <pre><code>*{ box-sizing:border-box; }   <span class="cm">/* width includes padding + border */</span></code></pre>
+  <p>Default is <code>content-box</code>, where <code>width:200px</code> + <code>padding:20px</code> +
+    <code>border:1px</code> renders as <b>242px</b>. With <code>border-box</code> it stays 200px.</p>
+
+  <h3>B5. Flexbox — one axis</h3>
+  <pre><code>.row{
+  display:flex;
+  align-items:center;      <span class="cm">/* cross axis */</span>
+  justify-content:space-between; <span class="cm">/* main axis */</span>
+  gap:12px;
+}
+.push{ margin-left:auto; }  <span class="cm">/* shove the rest to the right */</span>
+.fixed{ flex:none; }        <span class="cm">/* = 0 0 auto, never shrink */</span></code></pre>
+  <p><code>flex:1</code> is shorthand for <code>flex:1 1 0%</code> — grow, shrink, ignore content size.
+    <code>flex:auto</code> is <code>1 1 auto</code> — respects content width.</p>
+  <div class="note-margin">Flex item overflowing? Add <code>min-width:0</code> — flex items default to <code>min-width:auto</code>.</div>
+
+  <h3>B6. Grid — two axes</h3>
+  <pre><code>.stage{
+  display:grid;
+  grid-template-columns: minmax(0,1fr) 44px;
+}
+.cards{
+  grid-template-columns: repeat(auto-fill, minmax(212px,1fr));
+}</code></pre>
+  <table>
+    <tr><th></th><th>auto-fill</th><th>auto-fit</th></tr>
+    <tr><td>Few items</td><td>Keeps empty tracks</td><td>Collapses empties, items stretch</td></tr>
+  </table>
+  <p><b>Flex vs Grid:</b> flex is content-driven and one-dimensional; grid is layout-driven and
+    two-dimensional. Toolbar → flex. Page skeleton or card grid → grid.</p>
+
+  <h3>B7. Positioning &amp; stacking context</h3>
+  <table>
+    <tr><th>Value</th><th>Behaviour</th></tr>
+    <tr><td><code>static</code></td><td>Default; ignores top/left</td></tr>
+    <tr><td><code>relative</code></td><td>Offset from itself; space preserved</td></tr>
+    <tr><td><code>absolute</code></td><td>Removed from flow; positions to nearest positioned ancestor</td></tr>
+    <tr><td><code>fixed</code></td><td>Positions to viewport</td></tr>
+    <tr><td><code>sticky</code></td><td>Relative until a scroll threshold, then fixed</td></tr>
+  </table>
+  <p><code>position:sticky</code> needs a <b>threshold</b> (<code>top:0</code>) and an ancestor that
+    is <span class="warn">not</span> <code>overflow:hidden</code> — the single most common reason
+    sticky "doesn't work".</p>
+  <p>A <span class="term">stacking context</span> is created by: root, <code>position</code> + <code>z-index</code>,
+    <code>opacity &lt; 1</code>, <code>transform</code>, <code>filter</code>, <code>will-change</code>,
+    <code>backdrop-filter</code>. Inside one, <code>z-index:9999</code> can still sit behind a sibling
+    context with <code>z-index:1</code>.</p>
+
+  <h3>B8. Pseudo-elements</h3>
+  <pre><code>.ornament::before{ content:""; flex:1; height:1px; }
+p.is-opening::first-letter{ float:left; font-size:3.4em; }
+p.is-opening::first-line{ font-variant:small-caps; }
+li::marker{ color:var(--clay); }
+::selection{ background:var(--accent-surface); }</code></pre>
+  <p><span class="warn">Both <code>::before</code> and <code>::after</code> need <code>content</code></span>,
+    even if empty. They don't work on replaced elements (<code>img</code>, <code>input</code>).</p>
+
+  <h3>B9. Pseudo-classes worth knowing</h3>
+  <table>
+    <tr><td><code>:focus-visible</code></td><td>Focus ring for keyboard users only, not mouse clicks</td></tr>
+    <tr><td><code>:focus-within</code></td><td>Parent styles when any child has focus</td></tr>
+    <tr><td><code>:not(x)</code></td><td>Negation; takes the specificity of its argument</td></tr>
+    <tr><td><code>:is()</code> / <code>:where()</code></td><td>Grouping; <code>:where()</code> has <b>zero</b> specificity</td></tr>
+    <tr><td><code>:nth-child(2n+1)</code></td><td>Position among <i>all</i> siblings</td></tr>
+    <tr><td><code>:nth-of-type()</code></td><td>Position among siblings <i>of that tag</i></td></tr>
+  </table>
+</div>
+
+<div class="page">
+  <h3>B10. Transitions, transforms, animations</h3>
+  <pre><code>.btn{ transition: background 220ms cubic-bezier(.22,.61,.36,1); }
+
+@keyframes float{
+  0%,100%{ translate:0 0; }
+  50%    { translate:0 -10px; }
+}
+.sheet{ animation: float 7s ease-in-out infinite; }</code></pre>
+  <p><b>Only animate <code>transform</code> and <code>opacity</code>.</b> They are handled by the
+    compositor — no layout, no repaint. Animating <code>width</code>, <code>top</code> or
+    <code>margin</code> forces <span class="warn">layout on every frame</span> and drops you below 60fps.</p>
+  <table>
+    <tr><th>Change</th><th>Cost</th></tr>
+    <tr><td>width, height, top, margin, font-size</td><td>Layout → Paint → Composite (worst)</td></tr>
+    <tr><td>color, background, box-shadow</td><td>Paint → Composite</td></tr>
+    <tr><td><b>transform, opacity</b></td><td>Composite only (best)</td></tr>
+  </table>
+
+  <h3>B11. clamp(), min(), max(), calc()</h3>
+  <pre><code>font-size: clamp(28px, 3.8vw, 42px);  <span class="cm">/* min, preferred, max */</span>
+left: max(18px, calc(50% - 560px));
+width: min(100%, 820px);</code></pre>
+  <p><code>clamp()</code> gives fluid typography with <span class="hl">no media queries at all</span>.</p>
+
+  <h3>B12. Media queries &amp; user preferences</h3>
+  <pre><code>@media (max-width: 900px){ ... }
+@media (prefers-color-scheme: dark){ ... }
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.01ms !important;
+     transition-duration:.01ms !important; }
+}
+@media print{ .no-print{ display:none !important; } }</code></pre>
+  <p><b>Mobile-first</b> uses <code>min-width</code> and builds up; <b>desktop-first</b> uses
+    <code>max-width</code> and strips down. Pick one and stay consistent.</p>
+  <div class="box remember">
+    <span class="lbl">Accessibility</span>
+    <code>prefers-reduced-motion</code> is not optional polish — motion can trigger nausea and
+    migraines for people with vestibular disorders. <span class="hl">One block covers your whole site.</span>
+  </div>
+
+  <h3>B13. color-mix() and modern colour</h3>
+  <pre><code>background: color-mix(in srgb, var(--bg) 84%, transparent);
+border-color: color-mix(in srgb, var(--ok) 30%, var(--line));</code></pre>
+  <p>Mixes two colours at runtime — so a translucent header works in <span class="hl">any theme</span>
+    without hardcoding rgba values twice.</p>
+
+  <h3>B14. Logical properties</h3>
+  <pre><code>margin-inline: auto;      <span class="cm">/* left + right   */</span>
+padding-block: 24px;      <span class="cm">/* top + bottom   */</span>
+inset-block: 0;           <span class="cm">/* top:0; bottom:0 */</span>
+border-inline-start: 3px; <span class="cm">/* left in LTR, right in RTL */</span></code></pre>
+  <p>They follow writing direction, so a right-to-left language (Arabic, Urdu) mirrors correctly with
+    no extra CSS. Relevant here — the app supports Hindi.</p>
+
+  <h3>B15. Overflow &amp; scroll containers</h3>
+  <p><code>overflow:auto</code> scrolls only when needed; <code>scroll</code> always shows a bar;
+    <code>hidden</code> clips <span class="warn">and breaks any sticky descendant</span>;
+    <code>clip</code> clips without creating a scroll container.</p>
+  <pre><code>.tabs{ overflow-x:auto; scrollbar-width:none; }
+.tabs::-webkit-scrollbar{ display:none; }</code></pre>
+
+  <h3>B16. BEM naming</h3>
+  <pre><code>.hdr            <span class="cm">/* Block   */</span>
+.hdr__title     <span class="cm">/* Element */</span>
+.hdr--compact   <span class="cm">/* Modifier*/</span></code></pre>
+  <p>Keeps specificity flat (every selector is one class), makes the HTML–CSS relationship obvious,
+    and avoids deep nesting like <code>.header .nav ul li a</code>.</p>
+
+  <h3>B17. Print stylesheets</h3>
+  <pre><code>@page{ size:A4; margin:13mm; }
+@media print{
+  .no-print{ display:none !important; }
+  pre{ break-inside:avoid; }
+  h2 { break-after:avoid; }
+}</code></pre>
+  <p><code>break-inside:avoid</code> stops a code block splitting across pages —
+    <span class="hl">exactly how this PDF was made</span>.</p>
+
+  <h3>B18. Performance: reflow vs repaint</h3>
+  <ul>
+    <li><span class="term">Reflow (layout)</span> — geometry changed; browser recalculates positions. Expensive.</li>
+    <li><span class="term">Repaint</span> — only pixels changed (colour). Cheaper.</li>
+    <li><span class="term">Composite</span> — layers moved on the GPU. Cheapest.</li>
+  </ul>
+  <p><span class="term">Layout thrashing</span> = writing then reading layout in a loop:</p>
+  <pre><code><span class="cm">// BAD — forces reflow every iteration</span>
+items.forEach(el =&gt; { el.style.width = el.offsetWidth + 10 + 'px'; });
+
+<span class="cm">// GOOD — read all, then write all</span>
+const widths = items.map(el =&gt; el.offsetWidth);
+items.forEach((el,i) =&gt; el.style.width = widths[i] + 10 + 'px');</code></pre>
+</div>
+
+
+<!-- ============================================================
+     PART C — JAVASCRIPT
+     ============================================================ -->
+<div class="page">
+  <h2>Part C — JavaScript Concepts</h2>
+
+  <h3>C1. IIFE and the module pattern</h3>
+  <pre><code>const Settings = (() =&gt; {
+  let state = {};                 <span class="cm">// private</span>
+  function get(k){ return state[k]; }
+  function set(k,v){ state[k]=v; }
+  return { get, set };            <span class="cm">// public surface</span>
+})();</code></pre>
+  <p>An <span class="term">IIFE</span> (Immediately Invoked Function Expression) runs once and creates a
+    scope. Everything inside is private; only what you return is reachable. This is
+    <span class="hl">encapsulation via closure</span> — the pattern every library used before ES modules.</p>
+
+  <h3>C2. Closures</h3>
+  <p>A function <span class="term">remembers the scope it was created in</span>, even after that outer
+    function has finished.</p>
+  <pre><code>function counter(){
+  let n = 0;                <span class="cm">// stays alive</span>
+  return () =&gt; ++n;
+}
+const next = counter();
+next(); next();             <span class="out">// 1, then 2</span></code></pre>
+
+  <h3>C3. var / let / const, hoisting, TDZ</h3>
+  <table>
+    <tr><th></th><th>Scope</th><th>Hoisted</th><th>Redeclare</th></tr>
+    <tr><td><code>var</code></td><td>function</td><td>Yes → <code>undefined</code></td><td>Yes</td></tr>
+    <tr><td><code>let</code></td><td>block</td><td>Yes, but in TDZ</td><td>No</td></tr>
+    <tr><td><code>const</code></td><td>block</td><td>Yes, but in TDZ</td><td>No</td></tr>
+  </table>
+  <p><span class="term">TDZ</span> (Temporal Dead Zone) = the gap between entering a block and the
+    declaration line. Touching the variable there throws <code>ReferenceError</code>.</p>
+  <p><code>const</code> stops <span class="hl">reassignment, not mutation</span> —
+    <code>const a=[]; a.push(1)</code> is legal.</p>
+
+  <h3>C4. <code>this</code> and arrow functions</h3>
+  <pre><code>const obj = {
+  name:'A',
+  regular(){ return this.name; },       <span class="out">// 'A'</span>
+  arrow: () =&gt; this.name                <span class="out">// undefined</span>
+};</code></pre>
+  <p>A normal function's <code>this</code> depends on <b>how it is called</b>. An arrow function has
+    <span class="hl">no own <code>this</code></span> — it borrows from where it was defined. That is
+    why arrows are perfect for callbacks and wrong for object methods.</p>
+
+  <h3>C5. Event loop, microtasks, macrotasks</h3>
+  <pre><code>console.log('1');
+setTimeout(()=&gt;console.log('2'), 0);   <span class="cm">// macrotask</span>
+Promise.resolve().then(()=&gt;console.log('3')); <span class="cm">// microtask</span>
+console.log('4');
+<span class="out">// 1, 4, 3, 2</span></code></pre>
+  <p>Order: run all sync code → <b>drain the entire microtask queue</b> → take one macrotask → repeat.
+    Microtasks (promises, <code>queueMicrotask</code>) always beat <code>setTimeout</code>.</p>
+
+  <h3>C6. Event bubbling, capturing, delegation</h3>
+  <p>An event goes <span class="term">capture</span> (window → target), hits the target, then
+    <span class="term">bubbles</span> (target → window). Listeners are on the bubble phase unless you
+    pass <code>{capture:true}</code>.</p>
+  <pre><code>document.addEventListener('click', e =&gt; {
+  const tab = e.target.closest('.rail__tab');
+  if (tab) goToChapter(Number(tab.dataset.chapter));
+});</code></pre>
+  <p><span class="term">Delegation</span> = one listener on a parent instead of N on children.
+    Cheaper in memory, and it <span class="hl">works for elements added later</span>. Requires
+    <code>closest()</code> because <code>e.target</code> may be an inner <code>&lt;svg&gt;</code>.</p>
+  <div class="note-margin"><code>stopPropagation()</code> halts bubbling. <code>preventDefault()</code> cancels the default action. They are unrelated.</div>
+
+  <h3>C7. DOM query &amp; manipulation</h3>
+  <pre><code>document.querySelector('.btn')       <span class="cm">// first match or null</span>
+document.querySelectorAll('.btn')    <span class="cm">// static NodeList</span>
+document.getElementsByClassName()    <span class="cm">// LIVE HTMLCollection</span>
+
+el.classList.add / remove / toggle('is-on')
+el.classList.toggle('is-on', force)  <span class="cm">// force = boolean</span>
+el.setAttribute('aria-expanded','true')</code></pre>
+  <p><span class="term">Static vs live:</span> a <code>NodeList</code> from <code>querySelectorAll</code>
+    is a snapshot. An <code>HTMLCollection</code> updates itself — which can cause
+    <span class="warn">infinite loops</span> if you append inside a loop over it.</p>
+
+  <h3>C8. innerHTML vs textContent vs innerText</h3>
+  <table>
+    <tr><td><code>innerHTML</code></td><td>Parses HTML. <span class="warn">XSS risk</span> with user input.</td></tr>
+    <tr><td><code>textContent</code></td><td>Raw text, ignores CSS, fast, safe.</td></tr>
+    <tr><td><code>innerText</code></td><td>Rendered text — respects <code>display:none</code>, <b>triggers reflow</b>.</td></tr>
+  </table>
+  <p>Rule: <span class="hl">user data always goes through <code>textContent</code></span>.</p>
+
+  <h3>C9. Storage</h3>
+  <table>
+    <tr><th></th><th>Lives</th><th>Size</th><th>Sent to server</th></tr>
+    <tr><td>localStorage</td><td>Until cleared</td><td>~5–10MB</td><td>No</td></tr>
+    <tr><td>sessionStorage</td><td>Until tab closes</td><td>~5MB</td><td>No</td></tr>
+    <tr><td>Cookies</td><td>Expiry date</td><td>~4KB</td><td><b>Yes, every request</b></td></tr>
+  </table>
+  <pre><code>try{
+  localStorage.setItem('k', JSON.stringify(obj));
+}catch{
+  <span class="cm">// Safari private mode throws QuotaExceededError</span>
+}</code></pre>
+  <p>Storage is <span class="warn">synchronous and strings-only</span>. Always wrap in try/catch and
+    always <code>JSON.parse</code> defensively.</p>
+</div>
+
+<div class="page">
+  <h3>C10. Optional chaining &amp; nullish coalescing</h3>
+  <pre><code>el?.dataset?.action          <span class="cm">// undefined instead of throwing</span>
+fn?.()                       <span class="cm">// call only if it exists</span>
+
+a ?? b   <span class="cm">// b only if a is null/undefined</span>
+a || b   <span class="cm">// b if a is falsy (0, '', false too!)</span></code></pre>
+  <div class="box trick">
+    <span class="lbl">Classic trap</span>
+    <code>count || 10</code> returns <b>10</b> when count is <b>0</b>.
+    <code>count ?? 10</code> correctly returns <b>0</b>. <span class="hl">Use ?? for numbers.</span>
+  </div>
+
+  <h3>C11. Destructuring, spread, rest, defaults</h3>
+  <pre><code>const [a, b] = [1, 2];
+const { title, mins = 10 } = chapter;      <span class="cm">// default</span>
+const copy = { ...obj, done:true };        <span class="cm">// spread (shallow!)</span>
+function f(first, ...rest){}               <span class="cm">// rest</span></code></pre>
+  <p>Spread is a <span class="warn">shallow copy</span> — nested objects are still shared references.
+    Deep copy: <code>structuredClone(obj)</code>.</p>
+
+  <h3>C12. Array methods</h3>
+  <pre><code>map     → new array, same length
+filter  → new array, fewer items
+reduce  → single value
+forEach → nothing (side effects only)
+find / findIndex / some / every / includes
+flat / flatMap / at(-1)</code></pre>
+  <p><b>Mutating:</b> push, pop, splice, sort, reverse. <br>
+     <b>Non-mutating:</b> map, filter, slice, concat, toSorted, toReversed.</p>
+  <div class="note-margin"><code>sort()</code> mutates AND sorts as strings by default: <code>[10,9].sort()</code> → <code>[10,9]</code>. Pass a comparator.</div>
+
+  <h3>C13. Template literals</h3>
+  <pre><code>const html = `&lt;button data-n="${n}"&gt;${label}&lt;/button&gt;`;</code></pre>
+  <p>Multi-line, interpolation, and expressions inside <code>${}</code>. Building markup with
+    <code>.map().join('')</code> is fast and readable — but remember C8 about escaping.</p>
+
+  <h3>C14. Set and Map</h3>
+  <pre><code>const seen = new Set();     seen.add(x); seen.has(x);
+const listeners = new Set(); <span class="cm">// used for the settings observers</span>
+[...new Set(arr)]            <span class="cm">// dedupe an array</span></code></pre>
+  <p><code>Map</code> keys can be <b>any type</b> and keep insertion order; object keys are strings only.</p>
+
+  <h3>C15. matchMedia — media queries in JS</h3>
+  <pre><code>const mq = matchMedia('(prefers-color-scheme: dark)');
+mq.matches;                       <span class="cm">// boolean, right now</span>
+mq.addEventListener('change', fn); <span class="cm">// react to OS change</span></code></pre>
+
+  <h3>C16. IntersectionObserver</h3>
+  <pre><code>const io = new IntersectionObserver((entries, obs) =&gt; {
+  entries.forEach(e =&gt; {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('is-in');
+    obs.unobserve(e.target);       <span class="cm">// fire once</span>
+  });
+}, { threshold:.12, rootMargin:'0px 0px -12% 0px' });
+
+items.forEach(el =&gt; io.observe(el));</code></pre>
+  <p>Async and off the main thread — <span class="hl">far cheaper than a scroll listener</span>
+    calling <code>getBoundingClientRect()</code>. Used for scroll reveal, lazy loading, infinite scroll.</p>
+
+  <h3>C17. setTimeout, debounce, throttle</h3>
+  <pre><code><span class="cm">// DEBOUNCE — run once, after the user stops</span>
+function debounce(fn, wait){
+  let t;
+  return (...args) =&gt; {
+    clearTimeout(t);
+    t = setTimeout(() =&gt; fn(...args), wait);
+  };
+}
+
+<span class="cm">// THROTTLE — run at most once every `wait`</span>
+function throttle(fn, wait){
+  let ready = true;
+  return (...args) =&gt; {
+    if (!ready) return;
+    ready = false;
+    fn(...args);
+    setTimeout(() =&gt; ready = true, wait);
+  };
+}</code></pre>
+  <p><b>Debounce</b> → search input, resize. <b>Throttle</b> → scroll, mousemove.</p>
+
+  <h3>C18. getComputedStyle</h3>
+  <pre><code>const css = getComputedStyle(document.documentElement);
+css.getPropertyValue('--accent').trim();   <span class="cm">// read a CSS variable</span></code></pre>
+  <p>Returns the <span class="term">resolved</span> value after the cascade —
+    <code>el.style.x</code> only sees inline styles. <span class="warn">Forces a reflow</span>, so
+    don't call it in a loop.</p>
+
+  <h3>C19. requestAnimationFrame</h3>
+  <pre><code>requestAnimationFrame(() =&gt; el.style.strokeDashoffset = target);</code></pre>
+  <p>Runs before the next paint (~60fps), pauses in background tabs. Use it to
+    <span class="hl">let the browser apply an initial style before you change it</span>, so a
+    transition actually animates instead of jumping.</p>
+
+  <h3>C20. Strings, numbers, coercion</h3>
+  <pre><code>'5' + 3    <span class="out">// '53'  (+ prefers string)</span>
+'5' - 3    <span class="out">// 2     (- is numeric only)</span>
+[] + {}    <span class="out">// '[object Object]'</span>
+0.1 + 0.2  <span class="out">// 0.30000000000000004</span>
+
+String(n).padStart(2,'0')   <span class="cm">// '03'</span>
+Number('3')  parseInt('3px')  <span class="cm">// 3, 3</span>
+(2*Math.PI*r).toFixed(1)</code></pre>
+  <p><code>==</code> coerces, <code>===</code> does not. <span class="hl">Always use <code>===</code></span>
+    except <code>x == null</code>, which neatly catches both null and undefined.</p>
+</div>
+
+
+<!-- ============================================================
+     PART D — HTML INTERVIEW QUESTIONS
+     ============================================================ -->
+<div class="page">
+  <h2>Part D — Interview Questions: HTML</h2>
+
+  <div class="qa"><div class="q" data-n="1">What is semantic HTML and why use it?<span class="lvl b">Basic</span></div>
+    <div class="a">Using tags that describe meaning rather than appearance — <code>header</code>,
+      <code>nav</code>, <code>main</code>, <code>article</code>, <code>aside</code>, <code>footer</code>.
+      Benefits: screen readers build a landmark map so users can jump between regions, search engines
+      understand document structure, and the markup is self-documenting for other developers.</div></div>
+
+  <div class="qa"><div class="q" data-n="2">Difference between <code>&lt;section&gt;</code> and <code>&lt;div&gt;</code>?<span class="lvl b">Basic</span></div>
+    <div class="a"><code>section</code> is a thematic grouping and should have a heading; it appears in
+      the document outline. <code>div</code> carries no meaning and exists purely for styling or
+      layout. If removing the tag loses no meaning, it should have been a div.</div></div>
+
+  <div class="qa"><div class="q" data-n="3">How many <code>&lt;main&gt;</code> elements per page?<span class="lvl b">Basic</span></div>
+    <div class="a">One visible <code>main</code>. You may have others only if the rest are
+      <code>hidden</code>. It represents the dominant content, excluding repeated headers, navs
+      and footers.</div></div>
+
+  <div class="qa"><div class="q" data-n="4">What does the viewport meta tag do?<span class="lvl b">Basic</span></div>
+    <div class="a">It tells mobile browsers to use the real device width instead of a simulated ~980px
+      one. Without it the page renders wide and scales down, and CSS media queries never match, so a
+      responsive layout looks desktop-sized and tiny on a phone.</div></div>
+
+  <div class="qa"><div class="q" data-n="5">What are data-* attributes and how do you read them?<span class="lvl b">Basic</span></div>
+    <div class="a">Custom attributes for attaching your own data to markup, valid in HTML5. Read via
+      <code>el.dataset.name</code>, where <code>data-user-id</code> becomes <code>dataset.userId</code>.
+      Values are always strings, so numbers need <code>Number()</code>. In our project
+      <code>data-theme</code> on <code>&lt;html&gt;</code> drives all CSS theming.</div></div>
+
+  <div class="qa"><div class="q" data-n="6">Difference between <code>hidden</code>, <code>display:none</code>, <code>visibility:hidden</code> and <code>opacity:0</code>?<span class="lvl m">Medium</span></div>
+    <div class="a"><code>hidden</code> and <code>display:none</code> remove the element from layout and
+      from the accessibility tree. <code>visibility:hidden</code> keeps the space but hides it from
+      both. <code>opacity:0</code> keeps space, and the element is <b>still focusable, clickable and
+      read by screen readers</b> — a common accessibility bug. Note <code>hidden</code> is overridden
+      by any <code>display</code> rule.</div></div>
+
+  <div class="qa"><div class="q" data-n="7">Explain <code>defer</code> vs <code>async</code>.<span class="lvl m">Medium</span></div>
+    <div class="a">Both download in parallel with parsing. <code>async</code> executes the moment it
+      finishes downloading, so execution order between scripts is not guaranteed — fine for
+      independent scripts like analytics. <code>defer</code> waits until HTML parsing completes and
+      runs scripts in document order — correct when scripts depend on each other or on the DOM.</div></div>
+
+  <div class="qa"><div class="q" data-n="8">Your site flashes white before dark mode applies. Why, and how do you fix it?<span class="lvl h">Hard</span></div>
+    <div class="a">Because the saved theme is applied by a deferred or bottom-of-body script that runs
+      after first paint. The fix is a small <b>blocking</b> inline script in <code>&lt;head&gt;</code>
+      that reads localStorage and sets <code>document.documentElement.dataset.theme</code> before the
+      browser paints. It must be inline and synchronous — an external file reintroduces the flash.
+      Keep it tiny, since it blocks rendering.</div></div>
+
+  <div class="qa"><div class="q" data-n="9">When would you use <code>aria-label</code> vs <code>aria-labelledby</code>?<span class="lvl m">Medium</span></div>
+    <div class="a"><code>aria-label</code> supplies a string directly, for icon-only controls with no
+      visible text. <code>aria-labelledby</code> points at the id of existing visible text, which is
+      better when the label is already on screen — it stays in sync and gets translated.</div></div>
+
+  <div class="qa"><div class="q" data-n="10">What is a skip link and why does it exist?<span class="lvl m">Medium</span></div>
+    <div class="a">The first focusable element on the page, visually hidden until focused, linking to
+      <code>#main</code>. It lets keyboard and screen-reader users bypass a long repeated navigation
+      instead of tabbing through it on every page. It's a WCAG requirement (2.4.1 Bypass Blocks).</div></div>
+
+  <div class="qa"><div class="q" data-n="11">Why prefer <code>&lt;button&gt;</code> over <code>&lt;div onclick&gt;</code>?<span class="lvl m">Medium</span></div>
+    <div class="a">A button is focusable by default, fires on Enter and Space, is announced as a button,
+      supports <code>disabled</code>, and participates in forms. A div needs
+      <code>tabindex="0"</code>, <code>role="button"</code> and manual keyboard handlers to match —
+      and people usually forget the Space key.</div></div>
+
+  <div class="qa"><div class="q" data-n="12">What does <code>currentColor</code> do in SVG?<span class="lvl m">Medium</span></div>
+    <div class="a">It resolves to the inherited CSS <code>color</code> of the element. Setting
+      <code>stroke="currentColor"</code> means one icon automatically matches its parent's text colour
+      in light mode, dark mode and on hover, with no extra rules and no duplicate icon files.</div></div>
+
+  <div class="qa"><div class="q" data-n="13">What is <code>viewBox</code> and how does it differ from width/height?<span class="lvl h">Hard</span></div>
+    <div class="a"><code>viewBox="0 0 24 24"</code> defines the internal coordinate system — the
+      user-space window onto the drawing. <code>width</code>/<code>height</code> define the rendered
+      size on the page. Because the two are independent, the same path data scales to 14px or 64px
+      with no distortion. Without a viewBox, the SVG cannot scale responsively.</div></div>
+
+  <div class="qa"><div class="q" data-n="14">How do you make a custom accordion accessible?<span class="lvl h">Hard</span></div>
+    <div class="a">The trigger is a <code>&lt;button&gt;</code> carrying
+      <code>aria-expanded="true|false"</code>, toggled in JS, and <code>aria-controls</code> pointing
+      at the panel id. The panel uses the <code>hidden</code> attribute so it leaves the a11y tree
+      when closed. Update the visible label text too. Or use native
+      <code>&lt;details&gt;/&lt;summary&gt;</code> and write no JS at all.</div></div>
+</div>
+
+
+<!-- ============================================================
+     PART E — CSS INTERVIEW QUESTIONS
+     ============================================================ -->
+<div class="page">
+  <h2>Part E — Interview Questions: CSS</h2>
+
+  <div class="qa"><div class="q" data-n="1">Explain the box model.<span class="lvl b">Basic</span></div>
+    <div class="a">Content, then padding, then border, then margin. With the default
+      <code>content-box</code>, <code>width</code> applies to content only, so padding and border add
+      on top. <code>box-sizing:border-box</code> makes <code>width</code> include padding and border,
+      which is why almost every project sets it globally.</div></div>
+
+  <div class="qa"><div class="q" data-n="2">How is specificity calculated?<span class="lvl b">Basic</span></div>
+    <div class="a">Four columns: inline styles, ids, classes/attributes/pseudo-classes, then
+      elements/pseudo-elements. Compare left to right; a higher column always wins regardless of counts
+      in lower ones — so one id beats any number of classes. Ties go to the later rule in source order.</div></div>
+
+  <div class="qa"><div class="q" data-n="3">CSS variables vs Sass variables?<span class="lvl b">Basic</span></div>
+    <div class="a">Sass variables are compiled away at build time — static. CSS custom properties are
+      live in the browser: they inherit, cascade, can be changed by media queries or JavaScript, and
+      can be overridden on a subtree. That is what makes runtime theming possible.</div></div>
+
+  <div class="qa"><div class="q" data-n="4">When do you choose Flexbox over Grid?<span class="lvl b">Basic</span></div>
+    <div class="a">Flexbox for one dimension and content-driven sizing — toolbars, button rows, a header.
+      Grid for two dimensions and layout-driven sizing — page skeletons, card grids, anything where you
+      want to define the structure up front. They compose happily: grid for the page, flex inside cells.</div></div>
+
+  <div class="qa"><div class="q" data-n="5">Why is my <code>position:sticky</code> not working?<span class="lvl m">Medium</span></div>
+    <div class="a">Three usual causes: no threshold set (needs <code>top</code>, <code>bottom</code>,
+      <code>left</code> or <code>right</code>); an ancestor has <code>overflow:hidden/auto/scroll</code>,
+      which makes it the scroll container; or the parent isn't tall enough to scroll within. Sticky is
+      relative to the <b>nearest scrolling ancestor</b>, not the viewport.</div></div>
+
+  <div class="qa"><div class="q" data-n="6">What creates a stacking context?<span class="lvl h">Hard</span></div>
+    <div class="a">The root element, plus any element with: <code>position</code> other than static and
+      a <code>z-index</code> other than auto; <code>opacity</code> below 1; a <code>transform</code>,
+      <code>filter</code>, <code>perspective</code>, <code>backdrop-filter</code>,
+      <code>will-change</code>, <code>contain:paint</code>, or <code>isolation:isolate</code>.
+      Inside a context, children can never escape it — which is why a
+      <code>z-index:9999</code> modal can still sit behind a header whose parent has
+      <code>transform</code> applied.</div></div>
+
+  <div class="qa"><div class="q" data-n="7">Difference between <code>:focus</code> and <code>:focus-visible</code>?<span class="lvl m">Medium</span></div>
+    <div class="a"><code>:focus</code> matches any focus, including a mouse click — which is why people
+      used to remove outlines and break keyboard access. <code>:focus-visible</code> matches only when
+      the browser thinks a focus ring is useful, essentially keyboard navigation. Style
+      <code>:focus-visible</code> and everyone gets the right behaviour.</div></div>
+
+  <div class="qa"><div class="q" data-n="8">Which CSS properties are cheap to animate, and why?<span class="lvl h">Hard</span></div>
+    <div class="a"><code>transform</code> and <code>opacity</code>. They can be handled entirely by the
+      compositor on the GPU, skipping layout and paint. Animating <code>width</code>,
+      <code>height</code>, <code>top</code> or <code>margin</code> triggers layout on every frame for
+      that element and often its siblings, which is what drops you below 60fps.</div></div>
+
+  <div class="qa"><div class="q" data-n="9">Explain <code>clamp()</code>.<span class="lvl m">Medium</span></div>
+    <div class="a"><code>clamp(min, preferred, max)</code>. The preferred value is usually fluid
+      (<code>vw</code> or a calc), and the browser keeps the result between the bounds. It gives
+      responsive type with no media queries — <code>clamp(28px, 3.8vw, 42px)</code> scales smoothly
+      but never gets unreadably small or comically large.</div></div>
+
+  <div class="qa"><div class="q" data-n="10">What's the difference between <code>auto-fill</code> and <code>auto-fit</code>?<span class="lvl h">Hard</span></div>
+    <div class="a">With few items, <code>auto-fill</code> creates empty tracks that reserve space, so
+      your items stay their minimum width and leave a gap. <code>auto-fit</code> collapses the empty
+      tracks to zero so the existing items stretch to fill the row. Identical when the row is full.</div></div>
+
+  <div class="qa"><div class="q" data-n="11">How does <code>gap</code> differ from margin?<span class="lvl b">Basic</span></div>
+    <div class="a"><code>gap</code> spaces between children only — no leading or trailing space, and no
+      need for <code>:last-child</code> resets or negative margins on the container. It works in flex,
+      grid and multi-column.</div></div>
+
+  <div class="qa"><div class="q" data-n="12">A flex item with long text overflows its container. Why?<span class="lvl h">Hard</span></div>
+    <div class="a">Flex items default to <code>min-width:auto</code>, which means "never shrink below
+      my content's intrinsic size". The fix is <code>min-width:0</code> on the item (or
+      <code>overflow:hidden</code>), which allows it to shrink so <code>text-overflow:ellipsis</code>
+      can work. Same applies to grid items with <code>minmax(0,1fr)</code>.</div></div>
+
+  <div class="qa"><div class="q" data-n="13">What is <code>color-mix()</code> useful for?<span class="lvl m">Medium</span></div>
+    <div class="a">Blending two colours at runtime — <code>color-mix(in srgb, var(--bg) 84%,
+      transparent)</code>. For a translucent sticky header it means one rule works in both light and
+      dark themes, instead of hardcoding two different rgba values.</div></div>
+
+  <div class="qa"><div class="q" data-n="14">Mobile-first vs desktop-first — which and why?<span class="lvl m">Medium</span></div>
+    <div class="a">Mobile-first writes base styles for small screens and adds complexity with
+      <code>min-width</code>. It tends to produce less CSS, forces content priority decisions early,
+      and matches how most traffic actually arrives. Desktop-first with <code>max-width</code> is
+      valid for content-heavy dashboards. The real rule is to pick one and never mix directions.</div></div>
+
+  <div class="qa"><div class="q" data-n="15">What does <code>prefers-reduced-motion</code> do?<span class="lvl m">Medium</span></div>
+    <div class="a">It matches when the user has asked their OS to minimise animation. Motion can cause
+      nausea and migraines for people with vestibular disorders, so respecting it is an accessibility
+      requirement, not a nicety. One global block that reduces all durations to near-zero covers a
+      whole site.</div></div>
+
+  <div class="qa"><div class="q" data-n="16">Reflow vs repaint vs composite?<span class="lvl h">Hard</span></div>
+    <div class="a">Reflow (layout) recalculates geometry and can cascade to other elements — the most
+      expensive. Repaint redraws pixels without changing geometry, e.g. a colour change. Composite just
+      moves existing layers on the GPU — the cheapest, and where <code>transform</code>/<code>opacity</code>
+      land.</div></div>
+
+  <div class="qa"><div class="q" data-n="17">What is layout thrashing?<span class="lvl h">Hard</span></div>
+    <div class="a">Interleaving reads of layout properties (<code>offsetWidth</code>,
+      <code>getBoundingClientRect</code>, <code>getComputedStyle</code>) with writes inside a loop.
+      Each read forces the browser to flush pending style changes and recalculate layout synchronously.
+      Fix by batching — read everything first, then write everything.</div></div>
+
+  <div class="qa"><div class="q" data-n="18">Explain BEM and what problem it solves.<span class="lvl b">Basic</span></div>
+    <div class="a">Block, Element, Modifier — <code>.card</code>, <code>.card__title</code>,
+      <code>.card--featured</code>. Every selector is a single class, so specificity stays flat and
+      predictable, names are self-documenting, and you avoid brittle descendant chains like
+      <code>.sidebar .list li a</code> that break when markup moves.</div></div>
+
+  <div class="qa"><div class="q" data-n="19">How would you implement dark mode?<span class="lvl h">Hard</span></div>
+    <div class="a">Define semantic custom properties on <code>:root</code>, override them under
+      <code>[data-theme="dark"]</code>, and have every component consume only those variables. Default
+      to the OS via <code>prefers-color-scheme</code>, let the user override, persist the choice in
+      localStorage, and apply it with a blocking inline script in <code>&lt;head&gt;</code> to avoid a
+      flash. JavaScript then only ever changes one attribute.</div></div>
+
+  <div class="qa"><div class="q" data-n="20">Difference between <code>:nth-child</code> and <code>:nth-of-type</code>?<span class="lvl m">Medium</span></div>
+    <div class="a"><code>:nth-child(2)</code> matches an element that is the second child of its parent
+      <b>and</b> matches the selector — so <code>p:nth-child(2)</code> fails if the second child is a
+      div. <code>p:nth-of-type(2)</code> counts only <code>p</code> siblings, so it matches the second
+      paragraph regardless of what else is interleaved.</div></div>
+
+  <div class="qa"><div class="q" data-n="21">What is the difference between <code>:is()</code> and <code>:where()</code>?<span class="lvl h">Hard</span></div>
+    <div class="a">Both group selectors to shorten lists. <code>:is()</code> takes the specificity of
+      its most specific argument; <code>:where()</code> always has <b>zero</b> specificity. Use
+      <code>:where()</code> for resets and defaults so authors can override them with a single class.</div></div>
+
+  <div class="qa"><div class="q" data-n="22">When do margins collapse?<span class="lvl h">Hard</span></div>
+    <div class="a">Adjacent vertical margins between block siblings collapse to the larger of the two;
+      a parent's top margin collapses with its first child's; and an empty block's own top and bottom
+      collapse. It does not happen with flex or grid children, floats, absolutely positioned elements,
+      or when padding, border or <code>overflow</code> separates them.</div></div>
+
+  <div class="qa"><div class="q" data-n="23">How do logical properties help?<span class="lvl m">Medium</span></div>
+    <div class="a"><code>margin-inline</code>, <code>padding-block</code>,
+      <code>border-inline-start</code> and <code>inset-block</code> follow the writing direction rather
+      than physical screen edges. In a right-to-left language the layout mirrors automatically, with no
+      duplicate RTL stylesheet.</div></div>
+
+  <div class="qa"><div class="q" data-n="24">You need a translucent blurred header. What's the catch?<span class="lvl h">Hard</span></div>
+    <div class="a"><code>backdrop-filter</code> gives the blur, but it <b>creates a stacking context</b>,
+      so z-index inside behaves relative to it. It's also GPU-expensive on long scrolling pages, needs
+      the <code>-webkit-</code> prefix for older Safari, and requires a semi-transparent background —
+      with a fully opaque one there is nothing to blur.</div></div>
+</div>
+
+
+<!-- ============================================================
+     PART F — JS INTERVIEW QUESTIONS
+     ============================================================ -->
+<div class="page">
+  <h2>Part F — Interview Questions: JavaScript</h2>
+
+  <div class="qa"><div class="q" data-n="1">Explain <code>var</code>, <code>let</code> and <code>const</code>.<span class="lvl b">Basic</span></div>
+    <div class="a"><code>var</code> is function-scoped and hoisted as <code>undefined</code>.
+      <code>let</code> and <code>const</code> are block-scoped and hoisted into the Temporal Dead Zone,
+      so accessing them before declaration throws a ReferenceError. <code>const</code> prevents
+      reassignment, not mutation — you can still push to a const array.</div></div>
+
+  <div class="qa"><div class="q" data-n="2">What is a closure? Give a real use.<span class="lvl b">Basic</span></div>
+    <div class="a">A function that keeps access to the scope it was created in, even after the outer
+      function returns. Real uses: private state in the module pattern, the <code>t</code> variable
+      inside a debounce, and memoisation caches. In our settings module, <code>state</code> is a
+      closure variable no outside code can reach.</div></div>
+
+  <div class="qa"><div class="q" data-n="3">Difference between <code>==</code> and <code>===</code>?<span class="lvl b">Basic</span></div>
+    <div class="a"><code>===</code> compares type and value with no coercion. <code>==</code> coerces
+      first, giving surprises like <code>'' == 0</code> and <code>null == undefined</code> being true.
+      Use <code>===</code> everywhere, with the one idiomatic exception of <code>x == null</code> to
+      test for null or undefined together.</div></div>
+
+  <div class="qa"><div class="q" data-n="4">What is event bubbling?<span class="lvl b">Basic</span></div>
+    <div class="a">After an event fires on its target it travels up through every ancestor to the
+      document, firing the same-named listeners. The opposite phase, capturing, runs top-down first
+      and you opt into it with <code>{capture:true}</code>. Bubbling is what makes delegation possible.</div></div>
+
+  <div class="qa"><div class="q" data-n="5">Explain event delegation and when it's the right choice.<span class="lvl m">Medium</span></div>
+    <div class="a">Attach one listener to a common ancestor and identify the real source with
+      <code>e.target.closest('.selector')</code>. It's better when you have many similar children,
+      when children are added or removed dynamically, or when you'd otherwise attach and detach
+      listeners repeatedly. <code>closest()</code> matters because the click may land on a nested
+      icon rather than the button.</div></div>
+
+  <div class="qa"><div class="q" data-n="6"><code>stopPropagation()</code> vs <code>preventDefault()</code>?<span class="lvl m">Medium</span></div>
+    <div class="a">Unrelated. <code>preventDefault()</code> cancels the browser's default action —
+      form submit, link navigation. <code>stopPropagation()</code> stops the event travelling further
+      up the tree, which will silently break any delegated listener above you.
+      <code>return false</code> in a jQuery handler did both; in plain JS it does neither.</div></div>
+
+  <div class="qa"><div class="q" data-n="7">Predict the output: sync, setTimeout, promise.<span class="lvl m">Medium</span></div>
+    <div class="a">Sync code first, then the entire microtask queue (promise callbacks), then one
+      macrotask (<code>setTimeout</code>). So <code>log(1); setTimeout(log(2),0);
+      Promise.resolve().then(log(3)); log(4)</code> prints <b>1, 4, 3, 2</b>. A
+      <code>setTimeout(fn, 0)</code> is never truly zero — minimum ~4ms and it waits for the current
+      task plus all microtasks.</div></div>
+
+  <div class="qa"><div class="q" data-n="8">Arrow functions vs regular functions?<span class="lvl m">Medium</span></div>
+    <div class="a">Arrows have no own <code>this</code>, <code>arguments</code>, <code>super</code> or
+      <code>prototype</code>, and cannot be used with <code>new</code>. Their <code>this</code> is
+      lexical — taken from where they were defined. That makes them ideal as callbacks and wrong as
+      object methods or constructors.</div></div>
+
+  <div class="qa"><div class="q" data-n="9">What does <code>this</code> refer to?<span class="lvl h">Hard</span></div>
+    <div class="a">It depends on the call site. Plain call → <code>undefined</code> in strict mode,
+      global otherwise. Method call → the object before the dot. <code>new</code> → the new instance.
+      <code>call</code>/<code>apply</code>/<code>bind</code> → whatever you pass. Arrow → inherited
+      from the enclosing scope. DOM handler → the element the listener is attached to.</div></div>
+
+  <div class="qa"><div class="q" data-n="10">Difference between <code>innerHTML</code> and <code>textContent</code>?<span class="lvl b">Basic</span></div>
+    <div class="a"><code>innerHTML</code> parses the string as HTML, so injecting user input is an XSS
+      vulnerability. <code>textContent</code> sets raw text and is both safer and faster. A third,
+      <code>innerText</code>, returns rendered text — it respects <code>display:none</code> and
+      triggers a reflow to compute.</div></div>
+
+  <div class="qa"><div class="q" data-n="11">localStorage vs sessionStorage vs cookies?<span class="lvl b">Basic</span></div>
+    <div class="a">localStorage persists until cleared, ~5–10MB, never sent to the server.
+      sessionStorage is identical but dies with the tab. Cookies are ~4KB and are attached to every
+      HTTP request, which makes them right for auth tokens and wrong for app state. All are
+      origin-scoped; the two storages are synchronous and strings-only.</div></div>
+
+  <div class="qa"><div class="q" data-n="12">Why wrap localStorage in try/catch?<span class="lvl m">Medium</span></div>
+    <div class="a">It throws in several real situations: Safari private browsing, a full quota,
+      disabled storage in browser settings, or a sandboxed iframe. It also throws on
+      <code>JSON.parse</code> if the stored value is corrupt. Since it's non-critical, catching and
+      falling back to defaults keeps the app alive.</div></div>
+
+  <div class="qa"><div class="q" data-n="13">Debounce vs throttle — write one.<span class="lvl h">Hard</span></div>
+    <div class="a">Debounce delays until activity stops (search-as-you-type, resize end). Throttle
+      guarantees at most one call per interval (scroll, mousemove).
+      <pre><code>const debounce=(fn,ms)=&gt;{let t;return(...a)=&gt;{clearTimeout(t);
+  t=setTimeout(()=&gt;fn(...a),ms);};};</code></pre></div></div>
+
+  <div class="qa"><div class="q" data-n="14">What is IntersectionObserver and why is it better than scroll listeners?<span class="lvl m">Medium</span></div>
+    <div class="a">It asynchronously notifies you when an element enters or leaves a viewport or root,
+      without running code on every scroll frame. A scroll handler calling
+      <code>getBoundingClientRect()</code> forces synchronous layout repeatedly. IO runs off the main
+      thread, supports thresholds and rootMargin, and you can <code>unobserve</code> once fired.</div></div>
+
+  <div class="qa"><div class="q" data-n="15">Explain the module pattern with an IIFE.<span class="lvl m">Medium</span></div>
+    <div class="a">An immediately-invoked function creates a private scope; you return only the public
+      API. Everything else — state, helpers — is unreachable from outside, achieved purely through
+      closure. It was the standard way to avoid globals before ES modules, and it's still useful in a
+      no-build project like this one.</div></div>
+
+  <div class="qa"><div class="q" data-n="16"><code>??</code> vs <code>||</code>?<span class="lvl m">Medium</span></div>
+    <div class="a"><code>||</code> falls back on any falsy value, including <code>0</code>,
+      <code>''</code> and <code>false</code>. <code>??</code> falls back only on <code>null</code> or
+      <code>undefined</code>. So <code>count || 10</code> wrongly gives 10 when count is 0, whereas
+      <code>count ?? 10</code> correctly gives 0.</div></div>
+
+  <div class="qa"><div class="q" data-n="17">Shallow vs deep copy?<span class="lvl m">Medium</span></div>
+    <div class="a">Spread and <code>Object.assign</code> copy one level — nested objects remain shared
+      references, so mutating them affects both copies. For a deep copy use
+      <code>structuredClone(obj)</code>, which also handles Dates, Maps and Sets;
+      <code>JSON.parse(JSON.stringify(x))</code> works but loses functions, undefined and Dates.</div></div>
+
+  <div class="qa"><div class="q" data-n="18">Which array methods mutate?<span class="lvl b">Basic</span></div>
+    <div class="a">Mutating: <code>push, pop, shift, unshift, splice, sort, reverse, fill</code>.
+      Non-mutating: <code>map, filter, slice, concat, flat</code> and the newer
+      <code>toSorted, toReversed, toSpliced, with</code>. Note <code>sort()</code> both mutates and
+      compares as strings by default, so <code>[10,9,1].sort()</code> gives <code>[1,10,9]</code>.</div></div>
+
+  <div class="qa"><div class="q" data-n="19">NodeList vs HTMLCollection?<span class="lvl h">Hard</span></div>
+    <div class="a"><code>querySelectorAll</code> returns a static NodeList — a snapshot with
+      <code>forEach</code>. <code>getElementsByClassName</code>/<code>TagName</code> return a live
+      HTMLCollection that updates as the DOM changes and has no array methods. Looping over a live
+      collection while appending matching elements creates an infinite loop.</div></div>
+
+  <div class="qa"><div class="q" data-n="20">What is <code>getComputedStyle</code> and its cost?<span class="lvl h">Hard</span></div>
+    <div class="a">It returns the final resolved value of every property after the cascade, unlike
+      <code>el.style</code> which only sees inline styles. It's the way to read a CSS custom property
+      from JS. Because it must flush pending style and layout work, calling it inside a loop causes
+      layout thrashing.</div></div>
+
+  <div class="qa"><div class="q" data-n="21">Why <code>requestAnimationFrame</code> before changing a property you want to transition?<span class="lvl h">Hard</span></div>
+    <div class="a">If you add an element and set its final value in the same frame, the browser never
+      recorded a starting value, so it jumps instead of animating. Deferring the change to the next
+      frame guarantees the initial style is committed first, so the transition has two states to
+      interpolate between.</div></div>
+
+  <div class="qa"><div class="q" data-n="22">How do you read a CSS variable from JavaScript, and set one?<span class="lvl m">Medium</span></div>
+    <div class="a">Read with
+      <code>getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()</code> —
+      the trim matters because the value keeps its leading whitespace. Set with
+      <code>el.style.setProperty('--accent', '#fff')</code>. Setting it on an element scopes the
+      change to that subtree.</div></div>
+
+  <div class="qa"><div class="q" data-n="23">Explain hoisting precisely.<span class="lvl m">Medium</span></div>
+    <div class="a">During the creation phase the engine registers declarations before executing code.
+      Function declarations are fully hoisted and callable early. <code>var</code> is hoisted and
+      initialised to <code>undefined</code>. <code>let</code>/<code>const</code>/<code>class</code> are
+      hoisted but uninitialised — the TDZ — so early access throws. Function <i>expressions</i> follow
+      their variable's rules.</div></div>
+
+  <div class="qa"><div class="q" data-n="24">What's wrong with <code>for (var i...)</code> inside a loop of callbacks?<span class="lvl h">Hard</span></div>
+    <div class="a"><code>var</code> is function-scoped, so all callbacks close over the same
+      <code>i</code> and see its final value. <code>let</code> creates a fresh binding per iteration
+      and fixes it. Pre-ES6 the workaround was an IIFE capturing <code>i</code> as a parameter.</div></div>
+
+  <div class="qa"><div class="q" data-n="25">How would you persist and restore UI state across reloads?<span class="lvl m">Medium</span></div>
+    <div class="a">Keep one namespaced key holding a JSON object rather than many keys. Validate on
+      read against a schema of allowed values so a corrupt or stale entry falls back to defaults, wrap
+      both read and write in try/catch, and apply the state as early as possible — for anything
+      visual, in a blocking head script to avoid a flash.</div></div>
+
+  <div class="qa"><div class="q" data-n="26">What is the observer pattern and where did you use it?<span class="lvl h">Hard</span></div>
+    <div class="a">A subject keeps a list of callbacks and notifies them on change. In the settings
+      module, <code>onChange(fn)</code> adds to a <code>Set</code> and returns an unsubscribe function;
+      <code>set()</code> notifies everyone. The header, the design panel and the specimen page all
+      react independently, so none of them needs to know the others exist.</div></div>
+
+  <div class="qa"><div class="q" data-n="27">Why a <code>Set</code> for listeners rather than an array?<span class="lvl h">Hard</span></div>
+    <div class="a">A Set silently prevents the same callback being registered twice, and
+      <code>delete</code> is O(1) by reference rather than <code>indexOf</code> plus
+      <code>splice</code>. It also can't be corrupted by index manipulation elsewhere.</div></div>
+
+  <div class="qa"><div class="q" data-n="28">How do you avoid XSS when building HTML from data?<span class="lvl h">Hard</span></div>
+    <div class="a">Prefer <code>textContent</code> or <code>createElement</code> with property
+      assignment. If you must build a string, escape <code>&amp; &lt; &gt; " '</code> before
+      interpolation, never let user data land inside an attribute without quoting, and never build
+      <code>&lt;script&gt;</code>, <code>href="javascript:"</code> or event-handler attributes from
+      input. Consider a Content-Security-Policy and, on modern browsers, Trusted Types.</div></div>
+
+  <div class="qa"><div class="q" data-n="29">What does <code>e.target</code> vs <code>e.currentTarget</code> mean?<span class="lvl m">Medium</span></div>
+    <div class="a"><code>target</code> is the deepest element where the event originated — possibly a
+      nested span or svg. <code>currentTarget</code> is the element whose listener is currently
+      running. In delegation you read <code>target</code> and walk up with <code>closest()</code>;
+      <code>currentTarget</code> is only valid during dispatch.</div></div>
+
+  <div class="qa"><div class="q" data-n="30">How would you make an icon system without an icon font?<span class="lvl m">Medium</span></div>
+    <div class="a">Store path data in a JS object keyed by name, and render inline SVG with
+      <code>fill="none" stroke="currentColor"</code> and a shared <code>viewBox</code>. Icons then
+      inherit colour and size from CSS, need no extra network request, and can't produce the
+      flash-of-invisible-icon that fonts do. A helper replaces every
+      <code>[data-ico]</code> placeholder on load.</div></div>
+
+  <div class="qa"><div class="q" data-n="31">Explain <code>matchMedia</code> and following the OS theme.<span class="lvl m">Medium</span></div>
+    <div class="a"><code>matchMedia('(prefers-color-scheme: dark)')</code> gives a MediaQueryList with a
+      <code>matches</code> boolean and a <code>change</code> event. The trick is to only follow the OS
+      while the user hasn't chosen explicitly — store <code>null</code> as "no preference" and re-read
+      the query on change, so the site flips at sunset for users who never touched the toggle.</div></div>
+
+  <div class="qa"><div class="q" data-n="32">Your click handler stopped working for new elements. Why?<span class="lvl h">Hard</span></div>
+    <div class="a">Listeners bind to element references, not selectors, so anything created after
+      <code>querySelectorAll</code> ran has none. Either re-bind after every render — cheap to forget
+      and leaks if you don't remove the old ones — or delegate from a stable ancestor. A second cause
+      is an inner handler calling <code>stopPropagation()</code> and killing the delegated listener.</div></div>
+</div>
+
+
+<!-- ============================================================
+     PART G — CODING & OUTPUT
+     ============================================================ -->
+<div class="page">
+  <h2>Part G — Coding &amp; Output Questions</h2>
+
+  <h3>Output questions</h3>
+
+  <div class="qa"><div class="q" data-n="1">What prints?</div>
+    <div class="a"><pre><code>console.log(1);
+setTimeout(() =&gt; console.log(2), 0);
+Promise.resolve().then(() =&gt; console.log(3));
+console.log(4);</code></pre>
+      <b class="out">1, 4, 3, 2</b> — sync first, then all microtasks, then macrotasks.</div></div>
+
+  <div class="qa"><div class="q" data-n="2">What prints?</div>
+    <div class="a"><pre><code>for (var i = 0; i &lt; 3; i++) setTimeout(() =&gt; console.log(i), 0);
+for (let j = 0; j &lt; 3; j++) setTimeout(() =&gt; console.log(j), 0);</code></pre>
+      <b class="out">3, 3, 3, then 0, 1, 2</b> — <code>var</code> shares one binding;
+      <code>let</code> creates one per iteration.</div></div>
+
+  <div class="qa"><div class="q" data-n="3">What prints?</div>
+    <div class="a"><pre><code>console.log('5' + 3, '5' - 3, [] + {}, 0.1 + 0.2 === 0.3);</code></pre>
+      <b class="out">'53'  2  '[object Object]'  false</b> — <code>+</code> prefers string
+      concatenation; floats are binary approximations.</div></div>
+
+  <div class="qa"><div class="q" data-n="4">What prints?</div>
+    <div class="a"><pre><code>const a = { n: 1 };
+const b = { ...a };
+const c = { ...a, deep: a };
+b.n = 99;
+c.deep.n = 42;
+console.log(a.n);</code></pre>
+      <b class="out">42</b> — spread is shallow, so <code>c.deep</code> is still the same object
+      as <code>a</code>.</div></div>
+
+  <div class="qa"><div class="q" data-n="5">What prints?</div>
+    <div class="a"><pre><code>const obj = {
+  name: 'Sky',
+  regular(){ return this.name; },
+  arrow: () =&gt; this?.name
+};
+console.log(obj.regular(), obj.arrow());</code></pre>
+      <b class="out">'Sky'  undefined</b> — the arrow takes <code>this</code> from module scope,
+      not from <code>obj</code>.</div></div>
+
+  <div class="qa"><div class="q" data-n="6">What prints?</div>
+    <div class="a"><pre><code>console.log(0 || 'x', 0 ?? 'x', '' || 'y', null ?? 'z');</code></pre>
+      <b class="out">'x'  0  'y'  'z'</b> — <code>||</code> tests falsy, <code>??</code> tests
+      only null/undefined.</div></div>
+
+  <div class="qa"><div class="q" data-n="7">What prints?</div>
+    <div class="a"><pre><code>console.log([10, 9, 1].sort());
+console.log(typeof null, typeof NaN, typeof []);</code></pre>
+      <b class="out">[1, 10, 9]</b> then <b class="out">'object' 'number' 'object'</b> — sort
+      compares strings by default; <code>typeof null</code> is a famous language bug.</div></div>
+
+  <div class="qa"><div class="q" data-n="8">Why does this print <code>undefined</code>, and what fixes it?</div>
+    <div class="a"><pre><code>console.log(x); var x = 5;</code></pre>
+      <code>var</code> is hoisted and initialised to <code>undefined</code>; only the assignment
+      stays in place. With <code>let</code> it would throw a <b>ReferenceError</b> from the TDZ,
+      which is arguably more useful.</div></div>
+
+  <h3>Code-writing questions</h3>
+
+  <div class="qa"><div class="q" data-n="9">Write a theme toggle that persists and follows the OS by default.</div>
+    <div class="a"><pre><code>const KEY = 'theme';
+
+function current(){
+  const saved = localStorage.getItem(KEY);
+  if (saved === 'light' || saved === 'dark') return saved;
+  return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+function apply(t){ document.documentElement.dataset.theme = t; }
+function toggle(){
+  const next = current() === 'dark' ? 'light' : 'dark';
+  localStorage.setItem(KEY, next);
+  apply(next);
+}
+apply(current());
+matchMedia('(prefers-color-scheme: dark)')
+  .addEventListener('change', () =&gt; { if (!localStorage.getItem(KEY)) apply(current()); });</code></pre>
+      Mention the head script for FOUC and that CSS does all the styling off
+      <code>[data-theme]</code>.</div></div>
+
+  <div class="qa"><div class="q" data-n="10">Implement event delegation for a list of buttons.</div>
+    <div class="a"><pre><code>list.addEventListener('click', e =&gt; {
+  const btn = e.target.closest('[data-id]');
+  if (!btn || !list.contains(btn)) return;
+  select(Number(btn.dataset.id));
+});</code></pre>
+      The <code>contains</code> check guards against <code>closest()</code> escaping the container
+      when markup is nested unexpectedly.</div></div>
+
+  <div class="qa"><div class="q" data-n="11">Write debounce, then explain where you'd use throttle instead.</div>
+    <div class="a"><pre><code>function debounce(fn, wait = 300){
+  let t;
+  return function (...args){
+    clearTimeout(t);
+    t = setTimeout(() =&gt; fn.apply(this, args), wait);
+  };
+}</code></pre>
+      Use <code>function</code> not an arrow so <code>this</code> passes through. Debounce for
+      search input and resize; throttle for scroll and mousemove where you need periodic updates.</div></div>
+
+  <div class="qa"><div class="q" data-n="12">Build a scroll-reveal that fires once per element.</div>
+    <div class="a"><pre><code>const io = new IntersectionObserver((entries, obs) =&gt; {
+  for (const e of entries){
+    if (!e.isIntersecting) continue;
+    e.target.classList.add('is-in');
+    obs.unobserve(e.target);
+  }
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el =&gt; io.observe(el));</code></pre>
+      Add a <code>prefers-reduced-motion</code> guard that just adds the class to everything.</div></div>
+
+  <div class="qa"><div class="q" data-n="13">Write an accessible accordion toggle.</div>
+    <div class="a"><pre><code>btn.addEventListener('click', () =&gt; {
+  const open = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', String(!open));
+  panel.hidden = open;
+});</code></pre>
+      Key points: the trigger is a real <code>&lt;button&gt;</code>, state lives in
+      <code>aria-expanded</code>, and <code>hidden</code> removes the panel from the a11y tree.</div></div>
+
+  <div class="qa"><div class="q" data-n="14">Draw a progress ring with SVG and set it from JS.</div>
+    <div class="a"><pre><code>const r = 15.5, C = 2 * Math.PI * r;
+circle.setAttribute('stroke-dasharray', C);
+circle.setAttribute('stroke-dashoffset', C * (1 - pct / 100));</code></pre>
+      Rotate the SVG <code>-90deg</code> so 0% starts at the top, add
+      <code>stroke-linecap:round</code>, and transition <code>stroke-dashoffset</code> to animate.</div></div>
+
+  <div class="qa"><div class="q" data-n="15">Make a tiny pub/sub store with subscribe and unsubscribe.</div>
+    <div class="a"><pre><code>function createStore(initial = {}){
+  let state = { ...initial };
+  const subs = new Set();
+  return {
+    get: k =&gt; state[k],
+    set(k, v){
+      if (state[k] === v) return;      <span class="cm">// skip no-op updates</span>
+      state = { ...state, [k]: v };
+      subs.forEach(fn =&gt; fn(k, v));
+    },
+    subscribe(fn){ subs.add(fn); return () =&gt; subs.delete(fn); }
+  };
+}</code></pre>
+      Returning the unsubscribe function from <code>subscribe</code> is the detail interviewers
+      look for — it prevents leaks.</div></div>
+</div>
+
+
+<!-- ============================================================
+     PART H — REVISION
+     ============================================================ -->
+<div class="page">
+  <h2>Part H — Last-Minute Revision Sheet</h2>
+
+  <h3>Say these out loud before you walk in</h3>
+  <ul>
+    <li><b>Specificity</b> — inline 1000, id 100, class 10, element 1. Compare column by column.</li>
+    <li><b>Sticky fails</b> because of a missing threshold or an <code>overflow:hidden</code> ancestor.</li>
+    <li><b>Animate</b> only <code>transform</code> and <code>opacity</code>. Everything else costs layout.</li>
+    <li><b>Event loop</b> — sync → <i>all</i> microtasks → one macrotask → repeat.</li>
+    <li><b>Closure</b> — a function plus the scope it was born in.</li>
+    <li><b>Arrow functions</b> have no own <code>this</code>.</li>
+    <li><b>Delegation</b> — one listener + <code>closest()</code>; works for future elements.</li>
+    <li><b>innerHTML</b> is an XSS hole; <code>textContent</code> is not.</li>
+    <li><b>Spread</b> is shallow. <code>structuredClone</code> is deep.</li>
+    <li><b>0 || 10</b> is 10; <b>0 ?? 10</b> is 0.</li>
+    <li><b>flex item overflowing?</b> <code>min-width:0</code>.</li>
+    <li><b>Dark mode</b> — semantic CSS variables + one attribute + head script for FOUC.</li>
+  </ul>
+
+  <div class="box">
+    <span class="lbl">If they ask "walk me through a project"</span>
+    Structure it in four beats: <b>1)</b> what it does in one sentence — "an app that generates a
+    full textbook on any topic". <b>2)</b> a constraint you chose and why — "no framework, so
+    theming, the icon system and state had to be hand-built". <b>3)</b> one specific problem and
+    your fix — "the saved dark theme flashed white on load; I moved it to a blocking inline head
+    script". <b>4)</b> what you'd do differently next time. <span class="hl">The third beat is what
+    they're actually listening for.</span>
+  </div>
+
+  <div class="box remember">
+    <span class="lbl">When you don't know</span>
+    Say what you <i>do</i> know, name the thing you'd check, and offer a reasoned guess out loud.
+    "I haven't used Trusted Types, but the problem it solves is unsafe strings reaching innerHTML —
+    I'd expect it to enforce a sanitiser at the sink." <span class="hl">That scores far better than
+    silence or bluffing.</span>
+  </div>
+
+  <h3>Concepts checklist</h3>
+  <table>
+    <tr><th>HTML</th><th>CSS</th><th>JavaScript</th></tr>
+    <tr><td>
+      Semantic tags<br>viewport meta<br>data-* / dataset<br>ARIA basics<br>Focus &amp; skip links<br>
+      hidden vs none<br>Inline SVG<br>defer vs async<br>FOUC<br>Forms &amp; labels
+    </td><td>
+      Custom properties<br>Cascade &amp; specificity<br>Attribute theming<br>box-sizing<br>Flexbox<br>
+      Grid<br>Sticky &amp; stacking<br>Pseudo elements<br>focus-visible<br>Transitions<br>clamp()<br>
+      Media &amp; prefers-*<br>color-mix()<br>Logical props<br>Overflow<br>BEM<br>Print<br>Reflow/repaint
+    </td><td>
+      IIFE &amp; modules<br>Closures<br>let/const/TDZ<br>this &amp; arrows<br>Event loop<br>
+      Bubbling<br>Delegation<br>DOM APIs<br>innerHTML/XSS<br>Storage<br>JSON &amp; try/catch<br>
+      Template literals<br>Destructuring<br>Array methods<br>?. and ??<br>Set/Map<br>matchMedia<br>
+      IntersectionObserver<br>Debounce/throttle<br>rAF &amp; computed style
+    </td></tr>
+  </table>
+
+  <p style="margin-top:8mm;text-align:center;font-family:var(--hand);font-size:13pt;color:var(--blue)">
+    ❦ &nbsp;End of Day 1 notes &nbsp; ❦
+  </p>
+</div>
+
+</body>
+</html>

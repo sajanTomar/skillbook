@@ -1,0 +1,140 @@
+/* ============================================================================
+   SKILLBOOK — devtools.css
+   The floating design-options panel. Development-only: it exists so design
+   variants can be compared live. Delete this file, js/devtools.js and the one
+   <script> tag when the design is locked.
+   ============================================================================ */
+
+.devtools{
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: var(--z-devtools);
+  width: max-content;
+  max-width: calc(100vw - 36px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-3);
+  font-size: var(--fs-sm);
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+
+/* Collapsed: everything but the handle slides away. */
+.devtools.is-closed .devtools__body{ display: none; }
+.devtools.is-hidden{
+  transform: translateY(calc(100% + 24px));
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --- handle --- */
+.devtools__bar{
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 10px 10px 10px 14px;
+}
+.devtools__title{
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.devtools__title svg{ color: var(--accent); }
+
+.devtools__kbd{
+  margin-left: var(--sp-4);
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xs);
+  background: var(--surface-2);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-3);
+}
+.devtools__collapse{
+  margin-left: auto;
+  width: 26px; height: 26px;
+  display: grid; place-items: center;
+  border-radius: var(--r-sm);
+  color: var(--ink-3);
+  transition: all var(--dur) var(--ease);
+}
+.devtools__collapse:hover{ background: var(--surface-3); color: var(--ink); }
+.devtools.is-closed .devtools__collapse svg{ transform: rotate(180deg); }
+
+/* --- body --- */
+.devtools__body{
+  padding: 4px 12px 12px;
+  display: grid;
+  gap: var(--sp-2);
+  border-top: 1px solid var(--line-soft);
+  padding-top: 12px;
+}
+
+.devtools__row{
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.devtools__label{
+  flex: none;
+  width: 54px;
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* segmented control */
+.devtools__seg{
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  border-radius: var(--r-md);
+  background: var(--surface-3);
+}
+.devtools__seg button{
+  padding: 5px 12px;
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semi);
+  color: var(--ink-3);
+  transition: all var(--dur-fast) var(--ease);
+}
+.devtools__seg button:hover{ color: var(--ink); }
+.devtools__seg button[aria-pressed="true"]{
+  background: var(--sheet);
+  color: var(--ink);
+  box-shadow: var(--shadow-1);
+}
+
+.devtools__foot{
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: 2px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line-soft);
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+}
+.devtools__reset{
+  color: var(--accent);
+  font-weight: var(--fw-semi);
+}
+.devtools__reset:hover{ text-decoration: underline; }
+
+@media (max-width: 600px){
+  .devtools{ right: 12px; bottom: 12px; left: 12px; width: auto; }
+  .devtools__seg{ flex: 1; }
+  .devtools__seg button{ flex: 1; }
+}
+
+@media print{ .devtools{ display: none; } }

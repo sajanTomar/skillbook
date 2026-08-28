@@ -1,0 +1,308 @@
+/* ============================================================================
+   SKILLBOOK — tokens.css
+   Every value the interface is allowed to use lives here. Nothing else in the
+   project should contain a raw hex code, px font-size, or hand-written shadow.
+
+   Structure:
+     1. Palette          — raw colour ramps (never used directly in components)
+     2. Semantic colour  — light theme aliases
+     3. Semantic colour  — dark theme overrides
+     4. Desk variants    — white / tinted page background
+     5. Typography       — families, sizes, line-heights, weights, tracking
+     6. Space
+     7. Radii
+     8. Elevation
+     9. Motion
+    10. Layout & z-index
+   ============================================================================ */
+
+
+/* ============================================================================
+   1. PALETTE — raw ramps
+   Components must NOT reference these. They exist so the semantic layer below
+   has a consistent source, and so a rebrand is a change in one section.
+   ============================================================================ */
+:root{
+  /* warm neutral — the spine of the whole design */
+  --warm-0:    #FFFFFF;
+  --warm-50:   #FBFAF9;
+  --warm-100:  #F5F4F2;
+  --warm-150:  #F3F1ED;
+  --warm-200:  #E7E5E0;
+  --warm-300:  #D6D2CA;
+  --warm-400:  #B3AEA4;
+  --warm-500:  #918E86;
+  --warm-600:  #6E6B63;
+  --warm-700:  #55534C;
+  --warm-800:  #33322D;
+  --warm-900:  #191814;
+  --warm-950:  #0E0E0D;
+  --warm-975:  #0A0A09;
+
+  /* dark-theme neutrals (not just inverted warm — they need their own steps) */
+  --night-900: #141413;
+  --night-850: #1A1A18;
+  --night-800: #201F1D;
+  --night-700: #2A2A27;
+  --night-400: #85817A;
+  --night-300: #B4B0A7;
+  --night-100: #EDEAE3;
+
+  /* ink blue — primary accent */
+  --blue-50:   #EDF1F7;
+  --blue-600:  #2A4C7D;
+  --blue-700:  #1E3859;
+  --blue-300:  #8DB2DE;   /* dark-mode accent */
+  --blue-200:  #AFC9E8;
+  --blue-950:  #16202C;   /* dark-mode accent surface */
+
+  /* clay — secondary accent, saturation-matched to the blue */
+  --clay-50:   #F8F1EC;
+  --clay-600:  #9A5B3C;
+  --clay-300:  #CE9271;
+  --clay-950:  #241A15;
+
+  /* success */
+  --green-50:  #EDF4F0;
+  --green-600: #2E6B4F;
+  --green-300: #63BC94;
+  --green-950: #14211B;
+
+  /* error */
+  --red-50:    #F9EFEE;
+  --red-600:   #A8443C;
+  --red-300:   #DE8478;
+  --red-950:   #241715;
+}
+
+
+/* ============================================================================
+   2. SEMANTIC COLOUR — light theme
+   These are what components use. Read them as roles, not colours.
+   ============================================================================ */
+:root{
+  /* surfaces */
+  --desk:        var(--warm-0);    /* behind the page — overridden in §4 */
+  --sheet:       var(--warm-0);    /* the book page itself */
+  --surface:     var(--warm-0);    /* cards, popovers, inputs */
+  --surface-2:   var(--warm-50);   /* recessed panels, example boxes */
+  --surface-3:   var(--warm-100);  /* tiles, chips, inactive tracks */
+
+  /* text */
+  --ink:         var(--warm-900);  /* headings, primary text */
+  --ink-2:       var(--warm-700);  /* body copy */
+  --ink-3:       var(--warm-500);  /* captions, meta, placeholders */
+  --ink-invert:  var(--warm-0);    /* text on a dark fill */
+
+  /* lines */
+  --line:        var(--warm-200);  /* visible borders */
+  --line-soft:   #F1EFEB;          /* internal dividers */
+  --line-strong: var(--warm-300);  /* emphasis rules */
+
+  /* primary accent */
+  --accent:          var(--blue-600);
+  --accent-strong:   var(--blue-700);
+  --accent-surface:  var(--blue-50);
+  --accent-contrast: var(--warm-0);   /* text sitting on --accent */
+
+  /* secondary accent */
+  --clay:         var(--clay-600);
+  --clay-surface: var(--clay-50);
+
+  /* status */
+  --ok:           var(--green-600);
+  --ok-surface:   var(--green-50);
+  --danger:       var(--red-600);
+  --danger-surface: var(--red-50);
+
+  /* misc */
+  --focus-ring:  var(--accent);
+  --selection:   var(--blue-50);
+  --scrim:       color-mix(in srgb, var(--warm-900) 55%, transparent);
+}
+
+
+/* ============================================================================
+   3. SEMANTIC COLOUR — dark theme
+   ============================================================================ */
+[data-theme="dark"]{
+  --desk:        var(--warm-950);
+  --sheet:       var(--night-900);
+  --surface:     var(--night-900);
+  --surface-2:   var(--night-850);
+  --surface-3:   var(--night-800);
+
+  --ink:         var(--night-100);
+  --ink-2:       var(--night-300);
+  --ink-3:       var(--night-400);
+  --ink-invert:  var(--warm-950);
+
+  --line:        var(--night-700);
+  --line-soft:   var(--night-800);
+  --line-strong: #3A3A36;
+
+  --accent:          var(--blue-300);
+  --accent-strong:   var(--blue-200);
+  --accent-surface:  var(--blue-950);
+  --accent-contrast: var(--warm-975);
+
+  --clay:         var(--clay-300);
+  --clay-surface: var(--clay-950);
+
+  --ok:           var(--green-300);
+  --ok-surface:   var(--green-950);
+  --danger:       var(--red-300);
+  --danger-surface: var(--red-950);
+
+  --selection:   var(--blue-950);
+  --scrim:       rgba(0,0,0,.66);
+}
+
+
+/* ============================================================================
+   4. DESK VARIANTS
+   The page background behind the sheet. "white" keeps everything flat and
+   clean; "tinted" makes the sheet read as paper resting on a surface.
+   ============================================================================ */
+[data-desk="white"]  { --desk: var(--warm-0); }
+[data-desk="tinted"] { --desk: var(--warm-150); }
+
+[data-theme="dark"][data-desk="white"]  { --desk: var(--warm-950); }
+[data-theme="dark"][data-desk="tinted"] { --desk: var(--warm-975); }
+
+
+/* ============================================================================
+   5. TYPOGRAPHY
+   ============================================================================ */
+:root{
+  --font-sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto,
+                Helvetica, Arial, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua",
+                Georgia, ui-serif, serif;
+  --font-mono:  ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* size scale — roughly 1.2 ratio, tuned by eye rather than by formula */
+  --fs-2xs:  10.5px;   /* eyebrow caps, folio labels */
+  --fs-xs:   11.5px;   /* meta, badges */
+  --fs-sm:   12.5px;   /* secondary UI, captions */
+  --fs-base: 13.5px;   /* buttons, dense UI */
+  --fs-md:   15px;     /* default UI text */
+  --fs-lg:   17px;     /* book body copy */
+  --fs-xl:   21px;     /* wordmark, sub-headings */
+  --fs-2xl:  26px;
+  --fs-3xl:  32px;
+  --fs-4xl:  40px;
+  --fs-display: clamp(32px, 4.6vw, 52px);
+  --fs-chapter: clamp(28px, 3.8vw, 42px);
+
+  /* line heights */
+  --lh-none:   1;
+  --lh-tight:  1.12;   /* display headings */
+  --lh-snug:   1.35;
+  --lh-normal: 1.6;    /* UI */
+  --lh-book:   1.82;   /* long-form reading */
+
+  /* letter spacing */
+  --ls-tighter: -.025em;
+  --ls-tight:   -.01em;
+  --ls-normal:  0;
+  --ls-wide:    .09em;
+  --ls-caps:    .14em;   /* letterspaced small caps */
+  --ls-caps-lg: .22em;   /* masthead taglines */
+
+  /* weights */
+  --fw-regular: 400;
+  --fw-medium:  550;
+  --fw-semi:    620;
+  --fw-bold:    700;
+}
+
+
+/* ============================================================================
+   6. SPACE — 4px base grid
+   ============================================================================ */
+:root{
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-7:  32px;
+  --sp-8:  40px;
+  --sp-9:  48px;
+  --sp-10: 56px;
+  --sp-11: 64px;
+  --sp-12: 80px;
+  --sp-13: 96px;
+}
+
+
+/* ============================================================================
+   7. RADII
+   ============================================================================ */
+:root{
+  --r-xs:   4px;    /* the spine edge of a page */
+  --r-sm:   8px;
+  --r-md:   10px;   /* buttons */
+  --r-lg:   14px;   /* cards */
+  --r-xl:   20px;   /* large panels */
+  --r-full: 999px;
+}
+
+
+/* ============================================================================
+   8. ELEVATION
+   Tight and low-opacity. A shadow should suggest a millimetre of lift, not a
+   hovering slab.
+   ============================================================================ */
+:root{
+  --shadow-1: 0 1px 1px rgba(25,24,20,.04),
+              0 2px 5px -2px rgba(25,24,20,.06);
+  --shadow-2: 0 1px 2px rgba(25,24,20,.05),
+              0 10px 26px -14px rgba(25,24,20,.20);
+  --shadow-3: 0 20px 56px -22px rgba(25,24,20,.28);
+  --shadow-sheet: 0 1px 2px rgba(25,24,20,.04),
+                  0 18px 48px -26px rgba(25,24,20,.22);
+}
+[data-theme="dark"]{
+  --shadow-1: 0 1px 2px rgba(0,0,0,.40);
+  --shadow-2: 0 2px 6px rgba(0,0,0,.35), 0 18px 44px -22px rgba(0,0,0,.80);
+  --shadow-3: 0 24px 70px -26px rgba(0,0,0,.90);
+  --shadow-sheet: 0 2px 6px rgba(0,0,0,.40), 0 24px 60px -30px rgba(0,0,0,.90);
+}
+
+
+/* ============================================================================
+   9. MOTION
+   ============================================================================ */
+:root{
+  --ease:      cubic-bezier(.22,.61,.36,1);   /* default — decelerating */
+  --ease-in:   cubic-bezier(.55,.06,.68,.19);
+  --ease-soft: cubic-bezier(.4,0,.2,1);
+
+  --dur-fast: 120ms;
+  --dur:      220ms;
+  --dur-slow: 400ms;
+  --dur-page: 600ms;   /* page turns */
+}
+
+
+/* ============================================================================
+   10. LAYOUT & Z-INDEX
+   ============================================================================ */
+:root{
+  --page-max:   1240px;   /* outer container */
+  --sheet-max:  820px;    /* the readable page — ~68 characters at --fs-lg */
+  --gutter:     26px;     /* container side padding */
+  --gutter-sm:  16px;     /* ...below 600px */
+  --rail-w:     44px;     /* thumb-index rail */
+
+  --z-base:    1;
+  --z-rail:    20;
+  --z-turn:    50;
+  --z-header:  60;
+  --z-overlay: 100;
+  --z-toast:   150;
+  --z-devtools: 200;
+}

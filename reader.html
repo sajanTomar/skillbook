@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Skillbook — learn any subject as a real, self-paced book." />
+  <title>Working with Data Types — Python Programming · Skillbook</title>
+
+  <!-- Applied before first paint so the page never flashes the wrong theme. -->
+  <script>
+    (function () {
+      var s = {};
+      try { s = JSON.parse(localStorage.getItem('skillbook:settings')) || {}; } catch (e) {}
+      var d = document.documentElement;
+      d.dataset.theme  = s.theme  || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      d.dataset.desk   = s.desk   || 'tinted';
+      d.dataset.header = s.header || '1';
+      d.dataset.text   = s.text   || 'md';
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/page.css" />
+  <link rel="stylesheet" href="css/book.css" />
+  <link rel="stylesheet" href="css/devtools.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to the chapter</a>
+
+<!-- ============================================================
+     HEADER — all three variants; [data-header] picks one
+     ============================================================ -->
+<header class="site-header no-print">
+
+  <!-- ────────────── 1 · THE MASTHEAD ────────────── -->
+  <div class="hdr hdr--1">
+    <div class="hdr1__top">
+      <div class="hdr__row">
+        <a class="wordmark" href="./index.html">
+          <span class="wordmark__mark" aria-hidden="true">S</span>
+          <span>
+            <span class="wordmark__name">Skillbook</span>
+            <span class="wordmark__tag">Self-Paced Library</span>
+          </span>
+        </a>
+
+        <p class="hdr1__motto">❦ Learn anything, chapter by chapter</p>
+
+        <div class="hdr1__acts">
+          <button class="btn btn--plain" type="button" data-action="books">
+            <span data-ico="shelf"></span><span class="btn__label">My Books</span>
+          </button>
+          <button class="btn btn--line" type="button" data-action="contents">
+            <span data-ico="list"></span><span class="btn__label">Contents</span>
+          </button>
+          <button class="btn btn--fill" type="button" data-action="new-book">
+            <span data-ico="plus"></span><span class="btn__label">New Book</span>
+          </button>
+          <button class="icon-btn icon-btn--bare" type="button" data-action="theme" aria-label="Switch theme">
+            <span data-ico="theme"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hdr1__bot">
+      <div class="hdr__row">
+        <div class="hdr1__book">
+          <span class="hdr1__title">Python Programming</span>
+          <span class="hdr1__chapter" data-bind="chapter-label">Chapter 3 · Working with Data Types</span>
+        </div>
+        <div class="hdr1__meta">
+          <span class="track"><i data-bind="progress-bar" style="width:25%"></i></span>
+          <span class="hdr1__pct" data-bind="progress-pct">25%</span>
+          <span class="hdr1__tools">
+            <button class="btn btn--line btn--sm" type="button" data-action="text">
+              <span data-ico="type"></span><span class="btn__label">Text Size</span>
+            </button>
+            <button class="btn btn--ink btn--sm" type="button" data-action="test">
+              <span data-ico="check"></span><span class="btn__label">Take Chapter Test</span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="hairline"><i data-bind="progress-bar" style="width:25%"></i></div>
+  </div>
+
+  <!-- ────────────── 2 · THE READING DESK ────────────── -->
+  <div class="hdr hdr--2">
+    <div class="hdr__row">
+      <a class="wordmark" href="./index.html">
+        <span class="wordmark__mark" aria-hidden="true">S</span>
+        <span>
+          <span class="wordmark__name">Skillbook</span>
+          <span class="wordmark__tag">Self-Paced Library</span>
+        </span>
+      </a>
+
+      <div class="hdr2__now">
+        <div class="hdr2__label">Now reading</div>
+        <div class="hdr2__value">
+          Python Programming <small data-bind="chapter-of">· Ch. 3 of 8</small>
+        </div>
+      </div>
+
+      <div class="hdr2__acts">
+        <button class="btn btn--plain" type="button" data-action="contents">
+          <span data-ico="list"></span><span class="btn__label">Contents</span>
+        </button>
+        <button class="btn btn--plain" type="button" data-action="text">
+          <span data-ico="type"></span><span class="btn__label">Text Size</span>
+        </button>
+        <button class="btn btn--plain" type="button" data-action="bookmark">
+          <span data-ico="mark"></span><span class="btn__label">Bookmark</span>
+        </button>
+
+        <span class="hdr2__sep" aria-hidden="true"></span>
+
+        <div class="ring" style="width:38px;height:38px" title="Progress through this book">
+          <svg width="38" height="38" aria-hidden="true">
+            <circle class="ring-bg" cx="19" cy="19" r="15.5" fill="none" stroke-width="3"/>
+            <circle class="ring-fg" cx="19" cy="19" r="15.5" fill="none" stroke-width="3"/>
+          </svg>
+          <output>25</output>
+        </div>
+
+        <button class="btn btn--fill" type="button" data-action="test">
+          <span data-ico="check"></span><span class="btn__label">Take Chapter Test</span>
+        </button>
+        <button class="icon-btn icon-btn--bare" type="button" data-action="theme" aria-label="Switch theme">
+          <span data-ico="theme"></span>
+        </button>
+      </div>
+    </div>
+    <div class="hairline"><i data-bind="progress-bar" style="width:25%"></i></div>
+  </div>
+
+  <!-- ────────────── 3 · THE LIBRARY COUNTER ────────────── -->
+  <div class="hdr hdr--3">
+    <div class="hdr3__top">
+      <div class="hdr__row">
+        <a class="wordmark" href="./index.html">
+          <span class="wordmark__mark" aria-hidden="true">S</span>
+          <span>
+            <span class="wordmark__name">Skillbook</span>
+            <span class="wordmark__tag">Self-Paced Library</span>
+          </span>
+        </a>
+
+        <label class="search">
+          <span data-ico="search"></span>
+          <input type="search" placeholder="What do you want to learn today?"
+                 aria-label="Search a subject to learn" />
+          <kbd>⌘K</kbd>
+        </label>
+
+        <div class="hdr3__acts">
+          <button class="btn btn--plain" type="button" data-action="books">
+            <span data-ico="shelf"></span><span class="btn__label">My Books</span>
+            <span class="badge">3</span>
+          </button>
+          <button class="btn btn--fill" type="button" data-action="new-book">
+            <span data-ico="plus"></span><span class="btn__label">New Book</span>
+          </button>
+          <button class="icon-btn icon-btn--bare" type="button" data-action="theme" aria-label="Switch theme">
+            <span data-ico="theme"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hdr3__bot">
+      <div class="hdr__row">
+        <nav class="hdr3__tabs" aria-label="Progress">
+          <button class="hdr3__tab is-done" type="button"><span class="hdr3__num">✓</span>Area</button>
+          <button class="hdr3__tab is-done" type="button"><span class="hdr3__num">✓</span>Branch</button>
+          <button class="hdr3__tab is-done" type="button"><span class="hdr3__num">✓</span>Topic</button>
+          <button class="hdr3__tab" type="button" aria-current="step">
+            <span class="hdr3__num">4</span><span data-bind="chapter-of">Reading · Ch. 3 of 8</span>
+          </button>
+        </nav>
+        <div class="hdr3__right">
+          <button class="btn btn--line btn--sm" type="button" data-action="contents">
+            <span data-ico="list"></span><span class="btn__label">Contents</span>
+          </button>
+          <button class="btn btn--ink btn--sm" type="button" data-action="test">
+            <span data-ico="check"></span><span class="btn__label">Take Chapter Test</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="hairline"><i data-bind="progress-bar" style="width:25%"></i></div>
+  </div>
+
+</header>
+
+
+<!-- ============================================================
+     THE BOOK
+     ============================================================ -->
+<div class="stage">
+
+  <main id="main">
+    <article class="sheet">
+      <span class="sheet__edge" aria-hidden="true"></span>
+
+      <div class="running-head">
+        <span>Python Programming</span>
+        <span class="running-head__part">Part I · Foundations</span>
+      </div>
+
+      <div class="book">
+
+        <p class="chapter__no">Chapter Three</p>
+        <h1 class="chapter__title" data-bind="chapter-title">Working with Data Types</h1>
+        <div class="ornament" aria-hidden="true"><span>❦</span></div>
+
+        <p class="is-opening">Every value a program stores has a type — a promise about what the
+          value means and what you are allowed to do with it. Types are the grammar of a language:
+          they decide which sentences are meaningful and which are nonsense, long before the
+          program ever runs.</p>
+
+        <p>Before we write a single line, it is worth slowing down here. Almost every confusing bug
+          a beginner meets in their first month traces back to a value being a different type than
+          they assumed. Learn to see types, and a whole class of problems simply stops happening.</p>
+
+        <h3>3.1 · The four families</h3>
+
+        <div class="has-note">
+          <p>Python groups its built-in types into four families you will meet constantly.
+            <strong>Numbers</strong> count and measure. <strong>Text</strong> carries meaning for
+            humans. <strong>Collections</strong> hold many values at once. <strong>Booleans</strong>
+            answer yes-or-no questions and drive every decision the program makes.</p>
+          <aside class="margin-note">
+            <b>Note</b>A fifth family, <i>None</i>, represents the deliberate absence of a value.
+            It appears in chapter 5.
+          </aside>
+        </div>
+
+        <p>Notice that each family answers a different question. Confusing two of them — asking a
+          number to behave like text, or a collection to behave like a single value — is the most
+          common source of errors at this stage.</p>
+
+        <div class="callout">
+          <span class="callout__label">Key idea</span>
+          A type is not a restriction. It is a promise the language makes back to you: if you hold
+          a number, every operation defined on numbers will work, every time.
+        </div>
+
+        <blockquote class="pullquote">
+          Learn to see types, and a whole class of problems simply stops happening.
+        </blockquote>
+
+        <h3>3.2 · Seeing a type directly</h3>
+
+        <p>Python will always tell you what it thinks a value is, if you ask. The habit of asking —
+          rather than assuming — is worth building now, while the programs are small enough that
+          the answer is never a surprise.</p>
+
+        <div class="example">
+          <div class="example__head">Worked example 3.1</div>
+          <div class="example__body">
+            <p>Given <strong>x = 7</strong> and <strong>y = "7"</strong>, predict the result of
+              <strong>x + y</strong> before reading on.</p>
+          </div>
+          <pre class="code"><span class="c"># Two values that look alike but are not</span>
+x = <span class="n">7</span>            <span class="c"># a number</span>
+y = <span class="s">"7"</span>          <span class="c"># text that happens to contain a digit</span>
+
+<span class="f">print</span>(<span class="f">type</span>(x), <span class="f">type</span>(y))
+<span class="c"># → &lt;class 'int'&gt; &lt;class 'str'&gt;</span>
+
+<span class="f">print</span>(x + y)
+<span class="c"># → TypeError: unsupported operand type(s)</span></pre>
+          <div class="example__body">
+            <p>If you expected 14, you assumed both were numbers. If you expected "77", you assumed
+              both were text. Python does neither — it refuses, because addition between a number
+              and a string has no agreed meaning.</p>
+          </div>
+        </div>
+
+        <p>That refusal is a feature. A language that guessed would silently produce a wrong answer
+          that surfaces three hundred lines later, in a place that has nothing to do with the
+          mistake.</p>
+
+        <div class="callout callout--clay">
+          <span class="callout__label">Remember</span>
+          When a result surprises you, print the <i>type</i> before you print the value. Nine times
+          out of ten the type explains the surprise on its own.
+        </div>
+
+        <!-- ============ EXERCISES ============ -->
+        <section class="exercises">
+          <div class="exercises__head">
+            <h3>Exercises</h3>
+            <span class="exercises__tag">End of chapter 3</span>
+          </div>
+          <p class="exercises__note">Attempt each question before revealing the answer. Written
+            answers matter more than speed.</p>
+
+          <div class="exercise">
+            <span class="exercise__no">3.1</span>
+            <div class="exercise__body">
+              <p>In your own words, explain what a <strong>type</strong> promises the programmer.</p>
+              <button class="exercise__reveal" type="button" aria-expanded="false">
+                <span class="exercise__reveal-text">Show answer</span><span data-ico="chevD" data-size="14"></span>
+              </button>
+              <div class="exercise__answer" hidden>
+                Any answer saying a type guarantees which operations are valid on a value is
+                correct. Avoid answers that only give examples of types.
+              </div>
+            </div>
+          </div>
+
+          <div class="exercise">
+            <span class="exercise__no">3.2</span>
+            <div class="exercise__body">
+              <p>Name the four families of built-in type introduced above, with one example each.</p>
+              <button class="exercise__reveal" type="button" aria-expanded="false">
+                <span class="exercise__reveal-text">Show answer</span><span data-ico="chevD" data-size="14"></span>
+              </button>
+              <div class="exercise__answer" hidden>
+                Numbers (<code>7</code>), text (<code>"seven"</code>), collections
+                (<code>[7, 8]</code>) and booleans (<code>True</code>). What matters is that your
+                four examples differ in kind, not just in value.
+              </div>
+            </div>
+          </div>
+
+          <div class="exercise">
+            <span class="exercise__no">3.3</span>
+            <div class="exercise__body">
+              <p>Change one line of worked example 3.1 so that <code>x + y</code> produces
+                <code>14</code>, and one so it produces <code>"77"</code>.</p>
+              <button class="exercise__reveal" type="button" aria-expanded="false">
+                <span class="exercise__reveal-text">Show answer</span><span data-ico="chevD" data-size="14"></span>
+              </button>
+              <div class="exercise__answer">
+                <code>x + int(y)</code> gives 14; <code>str(x) + y</code> gives "77". Both work by
+                making the two values agree on a type first — the language never guesses for you.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="test-cta">
+          <div>
+            <h4>Chapter 3 test</h4>
+            <p>5 questions · marked live as you answer · not attempted yet</p>
+          </div>
+          <button class="btn" type="button" data-action="test">
+            <span data-ico="check"></span>Take the test
+          </button>
+        </div>
+
+      </div><!-- /.book -->
+
+      <div class="folio">
+        <span>42</span><span class="folio__dot"></span><span>Chapter 3</span>
+      </div>
+    </article>
+  </main>
+
+  <nav class="rail no-print" aria-label="Chapters">
+    <button class="rail__tab is-done" type="button" data-chapter="1" title="Introduction to Python">01</button>
+    <button class="rail__tab is-done" type="button" data-chapter="2" title="Your First Program">02</button>
+    <button class="rail__tab" type="button" data-chapter="3" aria-current="page" title="Working with Data Types">03</button>
+    <button class="rail__tab" type="button" data-chapter="4" title="Control Flow">04</button>
+    <button class="rail__tab" type="button" data-chapter="5" title="Functions">05</button>
+    <button class="rail__tab" type="button" data-chapter="6" title="Collections">06</button>
+    <button class="rail__tab" type="button" data-chapter="7" title="Files and Errors">07</button>
+    <button class="rail__tab" type="button" data-chapter="8" title="Putting It All Together">08</button>
+  </nav>
+</div>
+
+<button class="turn turn--prev no-print" type="button" aria-label="Previous chapter">
+  <span data-ico="chevL" data-size="18"></span>
+</button>
+<button class="turn turn--next no-print" type="button" aria-label="Next chapter">
+  <span data-ico="chevR" data-size="18"></span>
+</button>
+
+<script src="js/app.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/reader.js"></script>
+<script src="js/devtools.js"></script>
+<script>Skillbook.paintIcons();</script>
+</body>
+</html>
