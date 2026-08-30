@@ -205,41 +205,27 @@
 /* A note inside the book sheet */
 .has-note{ position: relative; }
 .margin-note{
-  margin: var(--sp-4) 0;
-  padding: var(--sp-3) var(--sp-4);
-  border-left: 3px solid var(--clay);
+  margin: var(--sp-5) 0;
+  padding: var(--sp-4) var(--sp-5);
+  border-left: 4px solid var(--clay);
   background: var(--clay-surface);
   border-radius: var(--r-sm);
   font-family: var(--font-sans);
-  font-size: var(--fs-xs);
-  line-height: 1.55;
-  color: var(--ink-2);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--ink);
   width: auto;
   position: static;
+  box-sizing: border-box;
 }
 .margin-note b{
   display: block;
-  margin-bottom: 3px;
-  font-size: 10px;
+  margin-bottom: var(--sp-1);
+  font-size: var(--fs-xs);
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-caps);
   text-transform: uppercase;
   color: var(--clay);
-}
-
-@media (min-width: 1400px){
-  .margin-note{
-    position: absolute;
-    left: calc(100% + var(--sp-5));
-    top: 0;
-    width: 160px;
-    margin: 0;
-    padding: 0 0 0 var(--sp-3);
-    border-left: 2px solid var(--clay);
-    background: transparent;
-    border-radius: 0;
-    color: var(--ink-3);
-  }
 }
 
 
