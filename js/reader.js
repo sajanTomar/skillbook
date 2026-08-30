@@ -75,6 +75,8 @@ Skillbook.reader = (() => {
   /* ------------------------------------------------------------------
      Chapter navigation
      ------------------------------------------------------------------ */
+  const NUMBER_WORDS = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
+
   function goToChapter(n) {
     if (n < 1 || n > activeBook.chapters.length) return;
     current = n;
@@ -87,6 +89,13 @@ Skillbook.reader = (() => {
     document.querySelectorAll('[data-bind="chapter-of"]')
       .forEach(el => { el.textContent = `· Ch. ${n} of ${activeBook.chapters.length}`; });
 
+    // Update sheet kicker (Chapter One, Chapter Two...)
+    const numWord = NUMBER_WORDS[n - 1] || n;
+    document.querySelectorAll('.chapter__no')
+      .forEach(el => { el.textContent = `Chapter ${numWord}`; });
+
+    document.title = `${chapter.title} — ${activeBook.title} · Skillbook`;
+
     syncRail();
     syncProgress();
     syncTurnButtons();
@@ -98,6 +107,13 @@ Skillbook.reader = (() => {
     document.querySelectorAll('.hdr2__value').forEach(el => {
       el.innerHTML = `${activeBook.title} <small data-bind="chapter-of">· Ch. ${current} of ${activeBook.chapters.length}</small>`;
     });
+
+    // Update sheet running head at top of paper page
+    const runningTitle = document.querySelector('.running-head > span:first-child');
+    if (runningTitle) runningTitle.textContent = activeBook.title;
+
+    const runningPart = document.querySelector('.running-head__part');
+    if (runningPart) runningPart.textContent = activeBook.part || 'Self-Paced Library';
 
     const rail = document.querySelector('.rail');
     if (rail) {

@@ -202,19 +202,20 @@
 .pullquote::before{ top: calc(var(--sp-4) * -1); }
 .pullquote::after{ bottom: calc(var(--sp-4) * -1); }
 
-/* A note in the outer margin, exactly where a textbook puts one. */
+/* A note inside the book sheet */
 .has-note{ position: relative; }
 .margin-note{
-  position: absolute;
-  left: calc(100% + var(--sp-6));
-  top: 0;
-  width: 150px;
-  padding-left: var(--sp-3);
-  border-left: 2px solid var(--clay);
+  margin: var(--sp-4) 0;
+  padding: var(--sp-3) var(--sp-4);
+  border-left: 3px solid var(--clay);
+  background: var(--clay-surface);
+  border-radius: var(--r-sm);
   font-family: var(--font-sans);
   font-size: var(--fs-xs);
   line-height: 1.55;
-  color: var(--ink-3);
+  color: var(--ink-2);
+  width: auto;
+  position: static;
 }
 .margin-note b{
   display: block;
@@ -224,6 +225,21 @@
   letter-spacing: var(--ls-caps);
   text-transform: uppercase;
   color: var(--clay);
+}
+
+@media (min-width: 1400px){
+  .margin-note{
+    position: absolute;
+    left: calc(100% + var(--sp-5));
+    top: 0;
+    width: 160px;
+    margin: 0;
+    padding: 0 0 0 var(--sp-3);
+    border-left: 2px solid var(--clay);
+    background: transparent;
+    border-radius: 0;
+    color: var(--ink-3);
+  }
 }
 
 
